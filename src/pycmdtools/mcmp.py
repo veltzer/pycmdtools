@@ -1,24 +1,23 @@
 """
 This script compares many files
 """
-import sys
 import collections
 import hashlib
 import functools
 import click
 
 
-def checksum(filename: str=None, algorithm: str=None) -> str:
+def checksum(file_name: str=None, algorithm: str=None) -> str:
     """
     calculate a checksum of a file. You dictate which algorithm.
     If you want to see all algorithms try:
     hashlib.algorithms_available
-    :param filename:
+    :param file_name:
     :param algorithm:
     :return:
     """
     block_size = 65536
-    with open(filename, mode='rb') as f:
+    with open(file_name, mode='rb') as f:
         hash_object = hashlib.new(algorithm)
         for buf in iter(functools.partial(f.read, block_size), b''):
             hash_object.update(buf)
@@ -27,11 +26,11 @@ def checksum(filename: str=None, algorithm: str=None) -> str:
 
 @click.command()
 @click.option('--algorithm', required=False, default='md5',
-              type=click.Choice(hashlib.algorithms_available))
-def main(algorithm):
-    file_names = sys.argv[1:]
+              type=click.Choice(hashlib.algorithms_available), help="algorithm to use")
+@click.argument('files', required=True, type=str, nargs=-1)
+def main(algorithm, files):
     d = collections.defaultdict(set)
-    for file_name in file_names:
+    for file_name in files:
         check_sum = checksum(file_name=file_name, algorithm=algorithm)
         d[check_sum].add(file_name)
     for check_sum, set_of_files in d.items():
