@@ -1,0 +1,1 @@
+- make the diamond code be part of some shared library of utils.
