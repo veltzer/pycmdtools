@@ -6,7 +6,7 @@ if not sys.version_info[0] == 3:
 
 setuptools.setup(
     name='pycmdtools',
-    version='0.0.9',
+    version='0.0.10',
     description='pycmdtools is set of useful command line tools written in python',
     long_description='pycmdtools is set of useful command line tools written in python',
     url='https://veltzer.github.io/pycmdtools',
@@ -26,8 +26,8 @@ setuptools.setup(
     ],
     entry_points={
         'console_scripts': [
-            'pct_uniq=pycmdtools.uniq:main',
-            'pct_mcmp=pycmdtools.mcmp:main',
+            'pycmdtools_uniq=pycmdtools.uniq:main',
+            'pycmdtools_mcmp=pycmdtools.mcmp:main',
         ],
     },
 )
