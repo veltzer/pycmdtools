@@ -1,1 +1,4 @@
 - make the diamond code be part of some shared library of utils.
+- do a tool which removes unprintable characters from files.
+	make it run on compressed files also
+	and return them to their compressed state.
