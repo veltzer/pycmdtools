@@ -1,20 +1,23 @@
 import sys
+import click
 
 
-def diamond_lines():
-    if len(sys.argv) == 1:
+def diamond_lines(args):
+    if not args:
         for line in sys.stdin.readlines():
             yield line
     else:
-        for filename in sys.argv[1:]:
+        for filename in args:
             with open(filename, 'rt') as file_handle:
                 for line in file_handle:
                     yield line
 
 
-def main():
+@click.command()
+@click.argument('args', nargs=-1)
+def main(args):
     saw = set()
-    for line in diamond_lines():
+    for line in diamond_lines(args):
         if line not in saw:
             saw.add(line)
             print(line, end='')
