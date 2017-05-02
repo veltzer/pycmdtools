@@ -2,6 +2,8 @@ import os
 import os.path
 import logging
 
+from typing import Callable
+
 """
 These are symbolic links used for locks in standard users directories
 """
@@ -18,7 +20,7 @@ logger = logging.getLogger(__name__)
 def remove_bad_symlinks(
         folder: str=None,
         use_standard_exceptions: bool=True,
-        onerror: function=None) -> None:
+        onerror: Callable=None) -> None:
     """
     remove bad symbolic links from a folder.
     
