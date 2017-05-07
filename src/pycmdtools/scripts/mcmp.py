@@ -34,7 +34,7 @@ def main(algorithm, files):
         check_sum = checksum(file_name=file_name, algorithm=algorithm)
         d[check_sum].add(file_name)
     for i, check_sum in enumerate(sorted(d.keys())):
-        print("{}: {}".format(i,", ".join(sorted(d[check_sum]))))
+        print("{}: {}".format(i, ", ".join(sorted(d[check_sum]))))
 
 
 if __name__ == '__main__':
