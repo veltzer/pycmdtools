@@ -1,6 +1,13 @@
 import click
 import requests
 
+"""
+This script downloads stuff from google drive.
+
+References:
+- http://stackoverflow.com/questions/25010369/wget-curl-large-file-from-google-drive
+"""
+
 
 def download_file_from_google_drive(id, destination):
     URL = "https://docs.google.com/uc?export=download"
@@ -35,8 +42,8 @@ def save_response_content(response, destination):
 
 
 @click.command()
-@click.argument('permalink', required=True, type=str, help="permanent link to google drive")
-@click.argument('destination', required=True, type=str, help="filename to save")
+@click.argument('permalink', required=True, type=str)
+@click.argument('destination', required=True, type=str)
 def main(permalink: str, destination: str) -> None:
     download_file_from_google_drive(permalink, destination)
 
