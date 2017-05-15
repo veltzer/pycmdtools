@@ -1,6 +1,3 @@
-"""
-This script compares many files
-"""
 import collections
 import hashlib
 import functools
@@ -8,6 +5,15 @@ from typing import List
 
 import click
 from tqdm import tqdm
+
+
+"""
+TODO:
+- make the algorithm faster by looking only at the beginning of the files.
+- make the algorithm faster by looking at the length of the files.
+- make the algorithm faster by having a gnu dbm ~/.mcmp which already stores
+    hashes of known files.
+"""
 
 
 def checksum(file_name: str=None, algorithm: str=None) -> str:
