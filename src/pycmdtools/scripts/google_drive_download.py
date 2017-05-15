@@ -50,9 +50,23 @@ def save_response_content(response, destination):
 
 
 @click.command()
-@click.argument('file_id', required=True, type=str)
-@click.argument('destination', required=True, type=str)
+@click.argument(
+    'file_id',
+    required=True,
+    type=str,
+)
+@click.argument(
+    'destination',
+    required=True,
+    type=str,
+)
 def main(file_id: str, destination: str) -> None:
+    """
+    Download a file from a google drive using it's id.
+    :param file_id: 
+    :param destination: 
+    :return: 
+    """
     download_file_from_google_drive(file_id, destination)
 
 if __name__ == '__main__':

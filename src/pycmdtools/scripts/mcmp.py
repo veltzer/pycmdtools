@@ -4,7 +4,10 @@ This script compares many files
 import collections
 import hashlib
 import functools
+from typing import List
+
 import click
+from tqdm import tqdm
 
 
 def checksum(file_name: str=None, algorithm: str=None) -> str:
@@ -25,11 +28,37 @@ def checksum(file_name: str=None, algorithm: str=None) -> str:
 
 
 @click.command()
-@click.option('--algorithm', required=False, default='md5',
-              type=click.Choice(hashlib.algorithms_available), help="algorithm to use")
-@click.argument('files', required=True, type=str, nargs=-1)
-def main(algorithm, files):
+@click.option(
+    '--algorithm',
+    required=False,
+    default='md5',
+    type=click.Choice(hashlib.algorithms_available),
+    help="algorithm to use",
+)
+@click.option(
+    '--progress',
+    required=False,
+    default=True,
+    type=bool,
+    help="show progress report",
+)
+@click.argument(
+    'files',
+    required=True,
+    type=str,
+    nargs=-1,
+)
+def main(algorithm: str, progress: bool, files: List[str]) -> None:
+    """
+    compare many files and print identical ones
+    :param algorithm:
+    :param progress:
+    :param files: 
+    :return: 
+    """
     d = collections.defaultdict(set)
+    if progress:
+        files = tqdm(files)
     for file_name in files:
         check_sum = checksum(file_name=file_name, algorithm=algorithm)
         d[check_sum].add(file_name)
