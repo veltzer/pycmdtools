@@ -14,7 +14,6 @@ standard_exceptions = {
     'SingletonSocket',  # chrome lock, /home/mark/.config/google-chrome/SingletonSocket
 }
 
-logger = logging.getLogger(__name__)
 
 
 def remove_bad_symlinks(
@@ -30,6 +29,7 @@ def remove_bad_symlinks(
     :param onerror: passed to os.walk
     :return: 
     """
+    logger = logging.getLogger(__name__)
     for root, dirs, files in os.walk(folder, onerror=onerror):
         for file in files:
             if use_standard_exceptions and file in standard_exceptions:
