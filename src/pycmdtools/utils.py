@@ -15,7 +15,6 @@ standard_exceptions = {
 }
 
 
-
 def remove_bad_symlinks(
         folder: str=None,
         use_standard_exceptions: bool=True,
