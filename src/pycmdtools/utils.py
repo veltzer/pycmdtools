@@ -15,18 +15,19 @@ standard_exceptions = {
 }
 
 
-def remove_bad_symlinks(
-        folder: str=None,
+def yield_bad_symlinks(
+        folder: str=".",
         use_standard_exceptions: bool=True,
-        onerror: Callable=None) -> None:
+        onerror: Callable=None,
+):
     """
     remove bad symbolic links from a folder.
-    
+
     Control this functions verbosity using the python logging framework
-    :param folder: 
-    :param use_standard_exceptions: 
+    :param folder:
+    :param use_standard_exceptions:
     :param onerror: passed to os.walk
-    :return: 
+    :return:
     """
     logger = logging.getLogger(__name__)
     for root, dirs, files in os.walk(folder, onerror=onerror):
@@ -39,5 +40,5 @@ def remove_bad_symlinks(
                 if not os.path.isabs(dereference_name):
                     dereference_name = os.path.join(root, dereference_name)
                 if not os.path.exists(dereference_name):
-                    logger.info("removing bad symlink [%s]...", full)
-                    os.unlink(full)
+                    logger.info("found bad symlink [%s]...", full)
+                yield full

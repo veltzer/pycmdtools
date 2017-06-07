@@ -1,5 +1,4 @@
 import logging
-import os
 
 import click
 
@@ -26,18 +25,17 @@ def error(args):
     help="skip standard symbolic links like browser lock files"
 )
 def main(folder: str, use_standard_exceptions: bool) -> None:
-    logger = logging.getLogger(__name__)
     """
-    remove bad symbolic links from a folder
+    find all bad symbolic links in a folder
     :return: 
     """
+    logger = logging.getLogger(__name__)
     for full in yield_bad_symlinks(
-            folder=folder,
-            use_standard_exceptions=use_standard_exceptions,
-            onerror=error,
+        folder=folder,
+        use_standard_exceptions=use_standard_exceptions,
+        onerror=error,
     ):
-        logger.info("removing bad symlink [%s]" % full)
-        os.unlink(full)
+        logger.info("%s" % full)
 
 
 if __name__ == '__main__':
