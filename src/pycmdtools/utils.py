@@ -40,5 +40,5 @@ def yield_bad_symlinks(
                 if not os.path.isabs(dereference_name):
                     dereference_name = os.path.join(root, dereference_name)
                 if not os.path.exists(dereference_name):
-                    logger.info("found bad symlink [%s]...", full)
-                yield full
+                    logger.debug("found bad symlink [%s]...", full)
+                    yield full
