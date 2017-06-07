@@ -2,6 +2,7 @@ import sys
 from typing import List
 
 import click
+from pylogconf import setup
 
 
 def diamond_lines(args: List[str]):
@@ -22,6 +23,7 @@ def diamond_lines(args: List[str]):
     nargs=-1,
 )
 def main(args: List[str]) -> None:
+    setup()
     """
     Filter out non unique values from a stream, even if not sorted
     :param args: 

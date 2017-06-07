@@ -1,6 +1,7 @@
 import logging
 
 import click
+from pylogconf import setup
 
 from pycmdtools.utils import yield_bad_symlinks
 
@@ -29,6 +30,7 @@ def main(folder: str, use_standard_exceptions: bool) -> None:
     find all bad symbolic links in a folder
     :return: 
     """
+    setup()
     logger = logging.getLogger(__name__)
     for full in yield_bad_symlinks(
         folder=folder,

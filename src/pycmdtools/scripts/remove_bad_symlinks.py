@@ -2,6 +2,7 @@ import logging
 import os
 
 import click
+from pylogconf import setup
 
 from pycmdtools.utils import yield_bad_symlinks
 
@@ -26,6 +27,7 @@ def error(args):
     help="skip standard symbolic links like browser lock files"
 )
 def main(folder: str, use_standard_exceptions: bool) -> None:
+    setup()
     logger = logging.getLogger(__name__)
     """
     remove bad symbolic links from a folder

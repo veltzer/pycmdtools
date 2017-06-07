@@ -4,6 +4,7 @@ import functools
 from typing import List
 
 import click
+from pylogconf import setup
 from tqdm import tqdm
 
 
@@ -62,6 +63,7 @@ def main(algorithm: str, progress: bool, files: List[str]) -> None:
     :param files: 
     :return: 
     """
+    setup()
     d = collections.defaultdict(set)
     if progress:
         files = tqdm(files)

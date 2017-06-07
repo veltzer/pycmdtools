@@ -3,6 +3,7 @@ from collections import defaultdict
 from typing import List
 
 import click
+from pylogconf import setup
 
 
 def diamond_lines(args: List[str]):
@@ -28,6 +29,7 @@ def main(args: List[str]) -> None:
     :param args: 
     :return: 
     """
+    setup()
     saw = defaultdict(int)
     for line in diamond_lines(args):
         line = line.rstrip()

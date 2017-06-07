@@ -1,5 +1,6 @@
 import click
 import requests
+from pylogconf import setup
 
 """
 This script downloads stuff from google drive.
@@ -67,6 +68,7 @@ def main(file_id: str, destination: str) -> None:
     :param destination: 
     :return: 
     """
+    setup()
     download_file_from_google_drive(file_id, destination)
 
 if __name__ == '__main__':
