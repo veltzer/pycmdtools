@@ -1,4 +1,3 @@
-import logging
 import os
 
 import click
@@ -28,7 +27,6 @@ def error(args):
 )
 def main(folder: str, use_standard_exceptions: bool) -> None:
     setup()
-    logger = logging.getLogger(__name__)
     """
     remove bad symbolic links from a folder
     :return: 
@@ -38,7 +36,7 @@ def main(folder: str, use_standard_exceptions: bool) -> None:
             use_standard_exceptions=use_standard_exceptions,
             onerror=error,
     ):
-        logger.info("removing bad symlink [%s]" % full)
+        print("removing [{}]".format(full))
         os.unlink(full)
 
 

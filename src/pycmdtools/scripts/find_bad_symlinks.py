@@ -1,5 +1,3 @@
-import logging
-
 import click
 from pylogconf import setup
 
@@ -31,13 +29,12 @@ def main(folder: str, use_standard_exceptions: bool) -> None:
     :return: 
     """
     setup()
-    logger = logging.getLogger(__name__)
     for full in yield_bad_symlinks(
         folder=folder,
         use_standard_exceptions=use_standard_exceptions,
         onerror=error,
     ):
-        logger.info("%s" % full)
+        print(full)
 
 
 if __name__ == '__main__':
