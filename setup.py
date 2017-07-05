@@ -31,6 +31,7 @@ setuptools.setup(
         'console_scripts': [
             'pycmdtools_google_drive_download=pycmdtools.scripts.google_drive_download:main',
             'pycmdtools_uniq=pycmdtools.scripts.uniq:main',
+            'pycmdtools_stats=pycmdtools.scripts.stats:main',
             'pycmdtools_count=pycmdtools.scripts.count:main',
             'pycmdtools_mcmp=pycmdtools.scripts.mcmp:main',
             'pycmdtools_remove_bad_symlinks=pycmdtools.scripts.remove_bad_symlinks:main',
