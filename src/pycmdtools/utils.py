@@ -2,7 +2,9 @@ import os
 import os.path
 import logging
 
-from typing import Callable
+from typing import Callable, List
+
+import sys
 
 """
 These are symbolic links used for locks in standard users directories
@@ -42,3 +44,14 @@ def yield_bad_symlinks(
                 if not os.path.exists(dereference_name):
                     logger.debug("found bad symlink [%s]...", full)
                     yield full
+
+
+def diamond_lines(args: List[str]):
+    if not args:
+        for line in sys.stdin.readlines():
+            yield line
+    else:
+        for filename in args:
+            with open(filename, 'rt') as file_handle:
+                for line in file_handle:
+                    yield line

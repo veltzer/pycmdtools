@@ -25,8 +25,8 @@ def diamond_lines(args: List[str]):
 )
 def main(args: List[str]) -> None:
     """
-    Filter out non unique values from a stream, even if not sorted
-    :param args: 
+    print unique values and their count
+    :param args:
     :return: 
     """
     setup()

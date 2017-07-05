@@ -15,16 +15,19 @@ from pycmdtools.utils import diamond_lines
 def main(args: List[str]) -> None:
     setup()
     """
-    Filter out non unique values from a stream, even if not sorted
+    stats on standard input
     :param args: 
     :return: 
     """
-    saw = set()
+    total_sum = 0.0
+    total_sum2 = 0.0
+    count = 0
     for line in diamond_lines(args):
-        if line not in saw:
-            saw.add(line)
-            print(line, end='')
-
+        count += 1
+        value = float(line)
+        total_sum += value
+        total_sum2 += value*value
+    print(total_sum/count)
 
 if __name__ == '__main__':
     main()
