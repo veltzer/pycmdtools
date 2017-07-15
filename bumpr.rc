@@ -12,11 +12,3 @@ files =
 [bump]
 unsuffix = true
 message = version {version}
-
-[changelog]
-file = CHANGELOG.rst
-bump = {version} ({date:%Y-%m-%d})
-prepare = In development
-
-[commands]
-bump = git push --tags
