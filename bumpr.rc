@@ -17,3 +17,6 @@ message = version {version}
 file = CHANGELOG.rst
 bump = {version} ({date:%Y-%m-%d})
 prepare = In development
+
+[commands]
+bump = git push --tags
