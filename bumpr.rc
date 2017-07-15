@@ -1,7 +1,6 @@
 [bumpr]
 file = src/pycmdtools/__init__.py
 vcs = git
-tests = tox
 publish = python setup.py sdist register upload
 clean =
 	python setup.py clean
