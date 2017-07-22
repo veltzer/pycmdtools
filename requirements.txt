@@ -1,4 +1,6 @@
+setuptools
 pylogconf
-click
 requests
 tqdm
+click
+typing
