@@ -1,0 +1,4 @@
+https://unix.stackexchange.com/questions/66795/how-to-check-progress-of-running-cp
+https://github.com/Xfennec/progress
+https://gist.github.com/azat/2830255
+https://stackoverflow.com/questions/10980689/how-to-follow-the-progress-of-a-linux-command
