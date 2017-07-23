@@ -53,10 +53,8 @@ def checksum(file_name: str=None, algorithm: str=None) -> str:
 )
 @click.argument(
     'files',
-    required=True,
-    type=str,
     nargs=-1,
-    show_default=True,
+    required=True,
 )
 def main(
         algorithm: str,

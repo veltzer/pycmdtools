@@ -22,7 +22,6 @@ def diamond_lines(args: List[str]):
     'args',
     required=False,
     nargs=-1,
-    show_default=True,
 )
 def main(
         args: List[str],

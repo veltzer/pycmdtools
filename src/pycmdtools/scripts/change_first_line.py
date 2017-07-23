@@ -1,4 +1,3 @@
-import json
 from typing import List
 
 import click
@@ -26,8 +25,6 @@ from pylogconf import setup
     'filenames',
     required=True,
     nargs=-1,
-    help="filenames to change",
-    show_default=True,
 )
 def main(
         from_line: str,

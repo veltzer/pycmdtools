@@ -8,9 +8,8 @@ from pylogconf import setup
 @click.command()
 @click.argument(
     'args',
-    required=False,
+    required=True,
     nargs=-1,
-    show_default=True,
 )
 def main(
         args: List[str],
