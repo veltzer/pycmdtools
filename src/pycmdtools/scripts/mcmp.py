@@ -41,6 +41,7 @@ def checksum(file_name: str=None, algorithm: str=None) -> str:
     default='md5',
     type=click.Choice(hashlib.algorithms_available),
     help="algorithm to use",
+    show_default=True,
 )
 @click.option(
     '--progress',
@@ -48,14 +49,20 @@ def checksum(file_name: str=None, algorithm: str=None) -> str:
     default=True,
     type=bool,
     help="show progress report",
+    show_default=True,
 )
 @click.argument(
     'files',
     required=True,
     type=str,
     nargs=-1,
+    show_default=True,
 )
-def main(algorithm: str, progress: bool, files: List[str]) -> None:
+def main(
+        algorithm: str,
+        progress: bool,
+        files: List[str],
+) -> None:
     """
     compare many files and print identical ones
     :param algorithm:

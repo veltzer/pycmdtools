@@ -11,8 +11,11 @@ from pycmdtools.utils import diamond_lines
     'args',
     required=False,
     nargs=-1,
+    show_default=True,
 )
-def main(args: List[str]) -> None:
+def main(
+        args: List[str],
+) -> None:
     setup()
     """
     Filter out non unique values from a stream, even if not sorted

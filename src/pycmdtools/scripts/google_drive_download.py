@@ -54,14 +54,23 @@ def save_response_content(response, destination):
 @click.argument(
     'file_id',
     required=True,
+    default=None,
     type=str,
+    help="file id from the google drive link",
+    show_default=True,
 )
 @click.argument(
     'destination',
     required=True,
+    default=None,
     type=str,
+    help="where to place the downloaded file?",
+    show_default=True,
 )
-def main(file_id: str, destination: str) -> None:
+def main(
+        file_id: str,
+        destination: str,
+) -> None:
     """
     Download a file from a google drive using it's id.
     :param file_id: 

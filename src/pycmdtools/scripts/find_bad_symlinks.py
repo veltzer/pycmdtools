@@ -14,16 +14,21 @@ def error(args):
     required=False,
     default=".",
     type=str,
-    help="which folder to scan"
+    help="which folder to scan",
+    show_default=True,
 )
 @click.option(
     '--use_standard_exceptions',
     required=False,
     default=True,
     type=bool,
-    help="skip standard symbolic links like browser lock files"
+    help="skip standard symbolic links like browser lock files",
+    show_default=True,
 )
-def main(folder: str, use_standard_exceptions: bool) -> None:
+def main(
+        folder: str,
+        use_standard_exceptions: bool,
+) -> None:
     """
     find all bad symbolic links in a folder
     :return: 

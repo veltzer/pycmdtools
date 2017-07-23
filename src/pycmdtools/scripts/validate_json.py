@@ -10,8 +10,11 @@ from pylogconf import setup
     'args',
     required=False,
     nargs=-1,
+    show_default=True,
 )
-def main(args: List[str]) -> None:
+def main(
+        args: List[str],
+) -> None:
     setup()
     """
     Validate json files

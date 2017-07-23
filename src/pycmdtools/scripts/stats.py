@@ -11,8 +11,11 @@ from pycmdtools.utils import diamond_lines
     'args',
     required=False,
     nargs=-1,
+    show_default=True,
 )
-def main(args: List[str]) -> None:
+def main(
+        args: List[str],
+) -> None:
     setup()
     """
     stats on standard input

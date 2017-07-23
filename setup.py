@@ -6,7 +6,7 @@ if not sys.version_info[0] == 3:
 
 setuptools.setup(
     name='pycmdtools',
-    version='0.0.36',
+    version='0.0.37',
     description='pycmdtools is set of useful command line tools written in python',
     long_description='pycmdtools is set of useful command line tools written in python',
     url='https://veltzer.github.io/pycmdtools',
@@ -28,14 +28,16 @@ setuptools.setup(
         'pylogconf',  # for logging
     ],
     entry_points={
+        # order of console_scripts is the same order of files in the 'scripts' folder
         'console_scripts': [
-            'pycmdtools_google_drive_download=pycmdtools.scripts.google_drive_download:main',
-            'pycmdtools_uniq=pycmdtools.scripts.uniq:main',
-            'pycmdtools_stats=pycmdtools.scripts.stats:main',
+            'pycmdtools_change_first_line=pycmdtools.scripts.change_first_line:main',
             'pycmdtools_count=pycmdtools.scripts.count:main',
+            'pycmdtools_find_bad_symlinks=pycmdtools.scripts.find_bad_symlinks:main',
+            'pycmdtools_google_drive_download=pycmdtools.scripts.google_drive_download:main',
             'pycmdtools_mcmp=pycmdtools.scripts.mcmp:main',
             'pycmdtools_remove_bad_symlinks=pycmdtools.scripts.remove_bad_symlinks:main',
-            'pycmdtools_find_bad_symlinks=pycmdtools.scripts.find_bad_symlinks:main',
+            'pycmdtools_stats=pycmdtools.scripts.stats:main',
+            'pycmdtools_uniq=pycmdtools.scripts.uniq:main',
             'pycmdtools_validate_json=pycmdtools.scripts.validate_json:main',
         ],
     },
