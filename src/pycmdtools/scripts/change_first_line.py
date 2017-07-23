@@ -40,6 +40,8 @@ def main(
     for filename in filenames:
         with open(filename, "rt") as input_handle:
             data = input_handle.readlines()
+        if len(data) == 0:
+            continue
         # change the first line
         if from_line is None or data[0] == from_line+"\n":
             data[0] = to_line+"\n"
