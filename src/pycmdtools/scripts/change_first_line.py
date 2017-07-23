@@ -41,10 +41,10 @@ def main(
         with open(filename, "rt") as input_handle:
             data = input_handle.readlines()
         # change the first line
-        if from_line is None or data[0] == from_line:
-            data[0] = to_line
+        if from_line is None or data[0] == from_line+"\n":
+            data[0] = to_line+"\n"
         with open(filename, "wt") as output_handle:
-            output_handle.write("\n".join(data))
+            output_handle.write("".join(data))
 
 
 if __name__ == '__main__':
