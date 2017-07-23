@@ -31,12 +31,14 @@ def main(
         to_line: str,
         filenames: List[str],
 ) -> None:
+    """
+        Validate json files
+        :param filenames: filenames to change the first line of
+        :return: nothing
+    """
     setup()
-    """
-    Validate json files
-    :param filenames: filenames to change the first line of
-    :return: nothing
-    """
+    print("from_line is [{}]".format(from_line))
+    print("to_line is [{}]".format(to_line))
     for filename in filenames:
         with open(filename, "rt") as input_handle:
             data = input_handle.readlines()
