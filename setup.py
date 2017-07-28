@@ -6,7 +6,7 @@ if not sys.version_info[0] == 3:
 
 setuptools.setup(
     name='pycmdtools',
-    version='0.0.42',
+    version='0.0.43',
     description='pycmdtools is set of useful command line tools written in python',
     long_description='pycmdtools is set of useful command line tools written in python',
     url='https://veltzer.github.io/pycmdtools',
@@ -19,8 +19,7 @@ setuptools.setup(
         'Programming Language :: Python :: 3',
     ],
     keywords='python command line shell utilities',
-    package_dir={'': 'src'},
-    packages=setuptools.find_packages('src'),
+    packages=setuptools.find_packages(),
     install_requires=[
         'click',  # for command line parsing
         'tqdm',  # for progress report
