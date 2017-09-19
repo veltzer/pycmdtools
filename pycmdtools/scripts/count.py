@@ -1,20 +1,10 @@
-import sys
 from collections import defaultdict
 from typing import List
 
 import click
 from pylogconf import setup
 
-
-def diamond_lines(args: List[str]):
-    if not args:
-        for line in sys.stdin.readlines():
-            yield line
-    else:
-        for filename in args:
-            with open(filename, 'rt') as file_handle:
-                for line in file_handle:
-                    yield line
+from pycmdtools.utils import diamond_lines
 
 
 @click.command()
