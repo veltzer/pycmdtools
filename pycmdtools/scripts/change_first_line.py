@@ -32,7 +32,7 @@ def main(
         filenames: List[str],
 ) -> None:
     """
-        Validate json files
+        Change the first line in files.
         :param from_line: what text to change
         :param to_line: what to change it to
         :param filenames: filenames to change the first line of

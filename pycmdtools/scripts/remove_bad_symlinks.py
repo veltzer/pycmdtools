@@ -31,11 +31,11 @@ def main(
         folder: str,
         use_standard_exceptions: bool,
 ) -> None:
-    setup()
     """
     remove bad symbolic links from a folder
     :return: 
     """
+    setup()
     for full in yield_bad_symlinks(
             folder=folder,
             use_standard_exceptions=use_standard_exceptions,
