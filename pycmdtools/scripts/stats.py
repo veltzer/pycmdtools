@@ -29,10 +29,12 @@ def main(
         count += 1
         value = float(line)
         total_sum += value
-        total_sum2 += value*value
-    print(total_sum/count)
+        total_sum2 += value * value
+    if count != 0:
+        print(total_sum / count)
+    else:
+        print("no data given")
 
 
 if __name__ == '__main__':
     main()
-
