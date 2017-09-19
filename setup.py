@@ -6,7 +6,7 @@ if not sys.version_info[0] == 3:
 
 setuptools.setup(
     name='pycmdtools',
-    version='0.0.48',
+    version='0.0.49',
     description='pycmdtools is set of useful command line tools written in python',
     long_description='pycmdtools is set of useful command line tools written in python',
     url='https://veltzer.github.io/pycmdtools',
@@ -25,9 +25,7 @@ setuptools.setup(
         'tqdm',  # for progress report
         'requests',  # for google drive download
         'pylogconf',  # for logging
-        'pip>=9.0.1', # for support for python version
     ],
-    python_requires=">=3",
     entry_points={
         # order of console_scripts is the same order of files in the 'scripts' folder
         'console_scripts': [
