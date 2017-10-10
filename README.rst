@@ -1,1 +1,2 @@
-This is to make 'python setup.py sdist' happy...
+# pycmdtools
+Various command line tools written in python
