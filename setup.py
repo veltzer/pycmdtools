@@ -1,18 +1,18 @@
 import setuptools
 
-import sys
-if not sys.version_info[0] == 3:
-    sys.exit("Sorry, only python version 3 is supported")
-
 setuptools.setup(
     name='pycmdtools',
     version='0.0.50',
     description='pycmdtools is set of useful command line tools written in python',
     long_description='pycmdtools is set of useful command line tools written in python',
-    url='https://veltzer.github.io/pycmdtools',
+    url='https://github.com/veltzer/pycmdtools',
+    download_url='https://github.com/veltzer/pycmdtools',
     author='Mark Veltzer',
     author_email='mark.veltzer@gmail.com',
+    maintainer='Mark Veltzer',
+    maintainer_email='mark.veltzer@gmail.com',
     license='MIT',
+    platforms=['python3'],
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
