@@ -1,3 +1,0 @@
-bumpr
-pypitools
-pipreqs
