@@ -1,7 +1,7 @@
 import os
 
 import click
-from pylogconf import setup
+from pylogconf.core import setup
 
 from pycmdtools.utils import yield_bad_symlinks
 

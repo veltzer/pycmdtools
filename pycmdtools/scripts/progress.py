@@ -1,5 +1,5 @@
 import click
-from pylogconf import setup
+from pylogconf.core import setup
 
 """
 enable to show progress by pointing to a FILE and not a PROCESS NAME or PID.

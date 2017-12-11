@@ -1,6 +1,6 @@
 import click
 import requests
-from pylogconf import setup
+from pylogconf.core import setup
 
 
 def download_file_from_google_drive(file_id: str, destination: str):

@@ -2,7 +2,7 @@ from collections import defaultdict
 from typing import List
 
 import click
-from pylogconf import setup
+from pylogconf.core import setup
 
 from pycmdtools.utils import diamond_lines
 

@@ -4,7 +4,7 @@ import functools
 from typing import List
 
 import click
-from pylogconf import setup
+from pylogconf.core import setup
 from tqdm import tqdm
 
 
