@@ -1,3 +1,5 @@
+- add a utility to remove non ascii characters from a file (with a report
+	about how many characters were removed, etc).
 - add a utility to max the screen resolution (of any screen which is active).
 - enable to show progress by pointing to a FILE and not a PROCESS NAME or PID.
 	If you point to a file then something like fuser(1) should be called
