@@ -5,7 +5,7 @@ setuptools.setup(
     version='0.0.51',
     description='pycmdtools is set of useful command line tools written in python',
     long_description='pycmdtools is set of useful command line tools written in python',
-    url='https://github.com/veltzer/pycmdtools',
+    url='https://veltzer.github.io/pycmdtools',
     download_url='https://github.com/veltzer/pycmdtools',
     author='Mark Veltzer',
     author_email='mark.veltzer@gmail.com',
