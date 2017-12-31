@@ -8,6 +8,7 @@ typing
 numpy
 pandas
 unidecode
+pyyaml
 # development
 pypitools
 pipreqs

@@ -28,6 +28,7 @@ setuptools.setup(
         'numpy',  # for sampling
         'pandas',  # for sampling
         'unidecode',  # for sampling
+        'pyyaml',  # for yaml
     ],
     entry_points={
         # order of console_scripts is the same order of files in the 'scripts' folder
