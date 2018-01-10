@@ -2,7 +2,7 @@ import setuptools
 
 setuptools.setup(
     name='pycmdtools',
-    version='0.0.54',
+    version='0.0.55',
     description='pycmdtools is set of useful command line tools written in python',
     long_description='pycmdtools is set of useful command line tools written in python',
     url='https://veltzer.github.io/pycmdtools',
