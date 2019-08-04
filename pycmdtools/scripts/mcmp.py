@@ -7,7 +7,6 @@ import click
 from pylogconf.core import setup
 from tqdm import tqdm
 
-
 """
 TODO:
 - make the algorithm faster by looking only at the beginning of the files.
@@ -17,7 +16,7 @@ TODO:
 """
 
 
-def checksum(file_name: str=None, algorithm: str=None) -> str:
+def checksum(file_name: str = None, algorithm: str = None) -> str:
     """
     calculate a checksum of a file. You dictate which algorithm.
     If you want to see all algorithms try:
@@ -57,9 +56,9 @@ def checksum(file_name: str=None, algorithm: str=None) -> str:
     required=True,
 )
 def main(
-        algorithm: str,
-        progress: bool,
-        files: List[str],
+    algorithm: str,
+    progress: bool,
+    files: List[str],
 ) -> None:
     """
     compare many files and print identical ones
