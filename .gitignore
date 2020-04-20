@@ -3,6 +3,7 @@ __pycache__/
 *.py[cod]
 /.venv/
 /.myenv.pip.errors
+/.pydmt
 
 # C extensions
 *.so
