@@ -12,3 +12,4 @@ pyyaml
 # development
 pypitools
 pipreqs
+pydmt
