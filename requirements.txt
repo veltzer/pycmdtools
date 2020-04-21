@@ -11,7 +11,6 @@ unidecode
 pyyaml
 # development
 pypitools
-pipreqs
 pydmt
 pyflakes
 pylint
