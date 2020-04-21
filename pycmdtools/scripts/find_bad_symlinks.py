@@ -31,14 +31,14 @@ def main(
 ) -> None:
     """
     find all bad symbolic links in a folder
-    :return: 
+    :return:
     """
     setup()
     for full in yield_bad_symlinks(
-        folder=folder,
-        use_standard_exceptions=use_standard_exceptions,
-        onerror=error,
-    ):
+            folder=folder,
+            use_standard_exceptions=use_standard_exceptions,
+            onerror=error,
+        ):
         print(full)
 
 

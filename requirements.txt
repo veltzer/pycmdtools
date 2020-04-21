@@ -14,3 +14,5 @@ pypitools
 pipreqs
 pydmt
 pyflakes
+pylint
+pytest

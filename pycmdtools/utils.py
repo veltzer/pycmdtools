@@ -6,10 +6,8 @@ from typing import Callable, List
 
 import sys
 
-"""
-These are symbolic links used for locks in standard users directories
-"""
-standard_exceptions = {
+# These are symbolic links used for locks in standard users directories
+__standard_exceptions__ = {
     'lock',  # firefox lock, $HOME/.mozilla/firefox/[XXX].default/lock
     'SingletonCookie',  # chrome lock, /home/mark/.config/google-chrome/SingletonCookie
     'SingletonLock',  # chrome lock, /home/mark/.config/google-chrome/SingletonLock
@@ -18,10 +16,10 @@ standard_exceptions = {
 
 
 def yield_bad_symlinks(
-    folder: str = ".",
-    use_standard_exceptions: bool = True,
-    onerror: Callable = None,
-):
+        folder: str = ".",
+        use_standard_exceptions: bool = True,
+        onerror: Callable = None,
+    ):
     """
     remove bad symbolic links from a folder.
 
@@ -32,9 +30,9 @@ def yield_bad_symlinks(
     :return:
     """
     logger = logging.getLogger(__name__)
-    for root, dirs, files in os.walk(folder, onerror=onerror):
+    for root, _dirs, files in os.walk(folder, onerror=onerror):
         for file in files:
-            if use_standard_exceptions and file in standard_exceptions:
+            if use_standard_exceptions and file in __standard_exceptions__:
                 continue
             full = os.path.join(root, file)
             if os.path.islink(full):

@@ -1,3 +1,3 @@
 <%!
     import config.version
-%>version_str = '${config.version.version_str}'
+%>__version__ = '${config.version.version_str}'
