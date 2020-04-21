@@ -13,3 +13,4 @@ pyyaml
 pypitools
 pipreqs
 pydmt
+pyflakes
