@@ -1,2 +1,5 @@
-# pycmdtools
-Various command line tools written in python
+=======================
+*pycmdtools* project by Mark Veltzer
+=======================
+
+version: (0, 0, 56)
