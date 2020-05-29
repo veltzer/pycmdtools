@@ -1,3 +1,4 @@
+- add command which creates a histogram of extensions of files in a folder.
 - get ridd of click and use pytconf.
 - make setup.py be made out of a template.
 - add a utility to remove non ascii characters from a file (with a report
