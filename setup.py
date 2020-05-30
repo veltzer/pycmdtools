@@ -7,7 +7,7 @@ http://setuptools.readthedocs.io/en/latest/setuptools.html
 setuptools.setup(
     # the first three fields are a must according to the documentation
     name='pycmdtools',
-    version='0.0.57',
+    version='0.0.58',
     packages=[
         'pycmdtools',
         'pycmdtools.scripts',
