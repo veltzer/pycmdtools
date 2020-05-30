@@ -26,8 +26,8 @@ def error(args):
     show_default=True,
 )
 def main(
-        folder: str,
-        use_standard_exceptions: bool,
+    folder: str,
+    use_standard_exceptions: bool,
 ) -> None:
     """
     find all bad symbolic links in a folder
@@ -35,10 +35,10 @@ def main(
     """
     setup()
     for full in yield_bad_symlinks(
-            folder=folder,
-            use_standard_exceptions=use_standard_exceptions,
-            onerror=error,
-        ):
+        folder=folder,
+        use_standard_exceptions=use_standard_exceptions,
+        onerror=error,
+    ):
         print(full)
 
 

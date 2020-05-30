@@ -16,10 +16,10 @@ __standard_exceptions__ = {
 
 
 def yield_bad_symlinks(
-        folder: str = ".",
-        use_standard_exceptions: bool = True,
-        onerror: Callable = None,
-    ):
+    folder: str = ".",
+    use_standard_exceptions: bool = True,
+    onerror: Callable = None,
+):
     """
     remove bad symbolic links from a folder.
 
