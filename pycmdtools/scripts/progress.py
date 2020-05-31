@@ -1,5 +1,4 @@
 import click
-from pylogconf.core import setup
 
 """
 enable to show progress by pointing to a FILE and not a PROCESS NAME or PID.
@@ -16,15 +15,10 @@ References:
 
 
 @click.command()
-def main(
+def progress(
 ) -> None:
     """
     follow the progress of another process
     :return:
     """
-    setup()
-
-
-if __name__ == '__main__':
-    main()
-
+    pass

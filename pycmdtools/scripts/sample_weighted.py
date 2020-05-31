@@ -28,4 +28,8 @@ df = df.loc[~df['query'].isin(old_df['query'])]
 df = df.groupby('query', sort=False).size()
 df.sample(
     n=12000,
-    weights=np.log2(df) / np.log2(df).sum()).index.to_series().to_csv('sample.txt', sep='\t', index=False)
+    weights=np.log2(df) / np.log2(df).sum()).index.to_series().to_csv(
+        'sample.txt',
+        sep='\t',
+        index=False
+)

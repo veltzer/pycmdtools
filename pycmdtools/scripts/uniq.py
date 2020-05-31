@@ -1,7 +1,6 @@
 from typing import List
 
 import click
-from pylogconf.core import setup
 
 from pycmdtools.utils import diamond_lines
 
@@ -12,7 +11,7 @@ from pycmdtools.utils import diamond_lines
     required=False,
     nargs=-1,
 )
-def main(
+def uniq(
         args: List[str],
 ) -> None:
     """
@@ -20,14 +19,8 @@ def main(
     :param args: 
     :return: 
     """
-    setup()
     saw = set()
     for line in diamond_lines(args):
         if line not in saw:
             saw.add(line)
             print(line, end='')
-
-
-if __name__ == '__main__':
-    main()
-

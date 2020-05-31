@@ -2,7 +2,6 @@ import yaml
 from typing import List
 
 import click
-from pylogconf.core import setup
 
 
 @click.command()
@@ -11,7 +10,7 @@ from pylogconf.core import setup
     required=True,
     nargs=-1,
 )
-def main(
+def validate_yaml(
         args: List[str],
 ) -> None:
     """
@@ -19,12 +18,6 @@ def main(
     :param args: files to validate
     :return: nothing
     """
-    setup()
     for filename in args:
         with open(filename, "rt") as input_handle:
             yaml.load(input_handle)
-
-
-if __name__ == '__main__':
-    main()
-

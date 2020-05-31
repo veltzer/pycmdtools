@@ -1,7 +1,6 @@
 from typing import List
 
 import click
-from pylogconf.core import setup
 
 
 @click.command()
@@ -26,7 +25,7 @@ from pylogconf.core import setup
     required=True,
     nargs=-1,
 )
-def main(
+def change_first_line(
         from_line: str,
         to_line: str,
         filenames: List[str],
@@ -38,7 +37,6 @@ def main(
         :param filenames: filenames to change the first line of
         :return: nothing
     """
-    setup()
     changed = 0
     actually_changed = 0
     print("from_line is [{}]".format(from_line))
@@ -60,7 +58,3 @@ def main(
     # print statistics
     print("changed is [{}]".format(changed))
     print("actually_changed is [{}]".format(actually_changed))
-
-
-if __name__ == '__main__':
-    main()

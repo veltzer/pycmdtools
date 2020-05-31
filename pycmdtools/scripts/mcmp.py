@@ -4,7 +4,6 @@ import functools
 from typing import List
 
 import click
-from pylogconf.core import setup
 from tqdm import tqdm
 
 """
@@ -55,7 +54,7 @@ def checksum(file_name: str = None, algorithm: str = None) -> str:
     nargs=-1,
     required=True,
 )
-def main(
+def mcmp(
     algorithm: str,
     progress: bool,
     files: List[str],
@@ -67,7 +66,6 @@ def main(
     :param files: 
     :return: 
     """
-    setup()
     d = collections.defaultdict(set)
     if progress:
         files = tqdm(files)
@@ -76,7 +74,3 @@ def main(
         d[check_sum].add(file_name)
     for i, check_sum in enumerate(sorted(d.keys())):
         print("{}: {}".format(i, ", ".join(sorted(d[check_sum]))))
-
-
-if __name__ == '__main__':
-    main()

@@ -1,7 +1,6 @@
 from typing import List
 
 import click
-from pylogconf.core import setup
 
 from pycmdtools.utils import diamond_lines
 
@@ -12,7 +11,7 @@ from pycmdtools.utils import diamond_lines
     required=False,
     nargs=-1,
 )
-def main(
+def stats(
         args: List[str],
 ) -> None:
     """
@@ -21,7 +20,6 @@ def main(
         :param args:
         :return:
     """
-    setup()
     total_sum = 0.0
     total_sum2 = 0.0
     count = 0
@@ -34,7 +32,3 @@ def main(
         print(total_sum / count)
     else:
         print("no data given")
-
-
-if __name__ == '__main__':
-    main()

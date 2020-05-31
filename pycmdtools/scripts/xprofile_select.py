@@ -2,14 +2,10 @@ import click
 
 
 @click.command()
-def main(
-) -> None:
+def xprofile_select() -> None:
     """
     Select an x profile with some interface
+    from ~/.xprofilerc
     :return:
     """
     pass
-
-
-if __name__ == '__main__':
-    main()

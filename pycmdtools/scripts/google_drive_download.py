@@ -1,6 +1,5 @@
 import click
 import requests
-from pylogconf.core import setup
 
 
 def download_file_from_google_drive(file_id: str, destination: str):
@@ -48,7 +47,7 @@ def save_response_content(response, destination):
     help='file name to save',
     show_default=True,
 )
-def main(
+def google_drive_download(
         file_id: str,
         destination: str,
 ) -> None:
@@ -70,9 +69,4 @@ def main(
     :param destination: 
     :return: 
     """
-    setup()
     download_file_from_google_drive(file_id, destination)
-
-
-if __name__ == '__main__':
-    main()
