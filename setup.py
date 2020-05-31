@@ -10,6 +10,7 @@ setuptools.setup(
     version='0.0.58',
     packages=[
         'pycmdtools',
+        'pycmdtools.endpoints',
         'pycmdtools.scripts',
     ],
     # from here all is optional
@@ -34,6 +35,7 @@ setuptools.setup(
     ],
     install_requires=[
         'pylogconf',
+        'pytconf',
         'requests',
         'tqdm',
         'click',
@@ -52,19 +54,7 @@ setuptools.setup(
     data_files=[
     ],
     entry_points={'console_scripts': [
-        'pycmdtools_change_first_line=pycmdtools.scripts.change_first_line:main',
-        'pycmdtools_count=pycmdtools.scripts.count:main',
-        'pycmdtools_find_bad_symlinks=pycmdtools.scripts.find_bad_symlinks:main',
-        'pycmdtools_google_drive_download=pycmdtools.scripts.google_drive_download:main',
-        'pycmdtools_mcmp=pycmdtools.scripts.mcmp:main',
-        'pycmdtools_print_all_args=pycmdtools.scripts.print_all_args:main',
-        'pycmdtools_remove_bad_symlinks=pycmdtools.scripts.remove_bad_symlinks:main',
-        'pycmdtools_stats=pycmdtools.scripts.stats:main',
-        'pycmdtools_uniq=pycmdtools.scripts.uniq:main',
-        'pycmdtools_validate_json=pycmdtools.scripts.validate_json:main',
-        'pycmdtools_validate_yaml=pycmdtools.scripts.validate_yaml:main',
-        'pycmdtools_progress=pycmdtools.scripts.progress:main',
-        'pycmdtools_sample_weighted=pycmdtools.scripts.sample_weighted:main',
+        'pycmdtools=pycmdtools.endpoints.main:main',
     ]},
     python_requires='>=3.5',
 )

@@ -1,10 +1,12 @@
 import config.project
+import pydmt.helpers.python
+
+from pycmdtools.endpoints.main import main
 
 package_name = config.project.project_name
 
 console_scripts = [
     pydmt.helpers.python.make_console_script(package_name, main),
-    # 'pycmdtools=pycmdtools.endpoints.main:main',
 ]
 
 setup_requires = [
@@ -12,6 +14,7 @@ setup_requires = [
 
 run_requires = [
     'pylogconf',
+    'pytconf',
     'requests',
     'tqdm',
     'click',
