@@ -22,8 +22,6 @@ def register_group_default():
 
 
 @register_endpoint(
-    configs=[],
-    suggest_configs=[],
     group=GROUP_NAME_DEFAULT,
 )
 def version() -> None:
