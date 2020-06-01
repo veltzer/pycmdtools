@@ -44,12 +44,12 @@ def yield_bad_symlinks(
                     yield full
 
 
-def diamond_lines(args: List[str]):
-    if not args:
+def diamond_lines(filenames: List[str]):
+    if not filenames:
         for line in sys.stdin.readlines():
             yield line
     else:
-        for filename in args:
+        for filename in filenames:
             with open(filename, 'rt') as file_handle:
                 for line in file_handle:
                     yield line
