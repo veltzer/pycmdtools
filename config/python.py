@@ -17,7 +17,6 @@ run_requires = [
     'pytconf',
     'requests',
     'tqdm',
-    'click',
     'numpy',
     'pandas',
     'unidecode',

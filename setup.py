@@ -37,7 +37,6 @@ setuptools.setup(
         'pytconf',
         'requests',
         'tqdm',
-        'click',
         'numpy',
         'pandas',
         'unidecode',

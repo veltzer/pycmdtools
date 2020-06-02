@@ -4,7 +4,6 @@ pylogconf
 pytconf
 requests
 tqdm
-click
 numpy
 pandas
 unidecode
