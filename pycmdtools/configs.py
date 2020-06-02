@@ -1,7 +1,7 @@
 """
 All configurations for pycmdtools
 """
-
+import hashlib
 
 from pytconf.config import Config, ParamCreator
 
@@ -35,4 +35,37 @@ class ConfigChangeLine(Config):
     )
     to_line = ParamCreator.create_str(
         help_string="to what value?",
+    )
+
+
+class ConfigProgress(Config):
+    """
+    Configuration options for progress reporting
+    """
+    progress = ParamCreator.create_bool(
+        help_string="show progress report",
+        default=True,
+    )
+
+
+class ConfigAlgorithm(Config):
+    """
+    Configuration options to select the digest algorithm
+    """
+    algorithm = ParamCreator.create_choice(
+        choice_list=list(hashlib.algorithms_available),
+        help_string="digest algorithm to use",
+        default="md5",
+    )
+
+
+class ConfigDownloadGoogleDrive(Config):
+    """
+    Parameters for downloading a file from google drive
+    """
+    file_id = ParamCreator.create_str(
+        help_string='id of the google drive document',
+    )
+    destination = ParamCreator.create_new_file(
+        help_string='file name to save',
     )
