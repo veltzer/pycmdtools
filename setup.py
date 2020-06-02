@@ -11,7 +11,6 @@ setuptools.setup(
     packages=[
         'pycmdtools',
         'pycmdtools.endpoints',
-        'pycmdtools.scripts',
     ],
     # from here all is optional
     description='pycmdtools is set of useful command line tools written in python',
