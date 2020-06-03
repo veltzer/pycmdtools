@@ -222,7 +222,7 @@ def checksum(file_name: str = None, algorithm: str = None) -> str:
 @register_endpoint(configs=[
     ConfigProgress,
     ConfigAlgorithm,
-])
+], allow_free_args=True)
 def mcmp() -> None:
     """
     compare many files and print identical ones
@@ -262,6 +262,7 @@ def download_file_from_google_drive(file_id: str, destination: str):
     session = requests.Session()
 
     response = session.get(url, params={'id': file_id}, stream=True)
+    assert response.status_code == 200, "bad request"
     token = get_confirm_token(response)
 
     if token:
