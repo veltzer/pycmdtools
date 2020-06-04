@@ -9,3 +9,5 @@
 
 pycmdtools is set of useful command line tools written in python
 
+project website: https://veltzer.github.io/pycmdtools
+
