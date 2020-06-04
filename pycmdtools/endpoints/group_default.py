@@ -220,11 +220,15 @@ def checksum(file_name: str = None, algorithm: str = None) -> str:
     return hash_object.hexdigest()
 
 
-@register_endpoint(configs=[
-    ConfigProgress,
-    ConfigAlgorithm,
-    ConfigCopy,
-], allow_free_args=True)
+@register_endpoint(
+    configs=[
+        ConfigProgress,
+        ConfigAlgorithm,
+        ConfigCopy,
+    ],
+    allow_free_args=True,
+    min_free_args=2,
+)
 def mcmp() -> None:
     """
     compare many files and print identical ones

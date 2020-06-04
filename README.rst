@@ -2,4 +2,4 @@
 *pycmdtools* project by Mark Veltzer
 =======================
 
-version: (0, 0, 62)
+version: (0, 0, 63)
