@@ -6,6 +6,7 @@ import functools
 import hashlib
 import json
 import os
+import shutil
 from collections import defaultdict
 
 import requests
@@ -16,7 +17,7 @@ from tqdm import tqdm
 import pycmdtools
 import pycmdtools.version
 from pycmdtools.configs import ConfigFolder, ConfigUseStandardExceptions, ConfigChangeLine, ConfigProgress, \
-    ConfigAlgorithm, ConfigDownloadGoogleDrive
+    ConfigAlgorithm, ConfigDownloadGoogleDrive, ConfigCopy
 from pycmdtools.utils import yield_bad_symlinks, diamond_lines
 
 GROUP_NAME_DEFAULT = "default"
@@ -222,6 +223,7 @@ def checksum(file_name: str = None, algorithm: str = None) -> str:
 @register_endpoint(configs=[
     ConfigProgress,
     ConfigAlgorithm,
+    ConfigCopy,
 ], allow_free_args=True)
 def mcmp() -> None:
     """
@@ -241,6 +243,17 @@ def mcmp() -> None:
         d[check_sum].add(file_name)
     for i, check_sum in enumerate(sorted(d.keys())):
         print("{}: {}".format(i, ", ".join(sorted(d[check_sum]))))
+    if ConfigCopy.copy:
+        sorted_keys = sorted(d.keys())
+        index_from = int(input("From what version? "))
+        index_to = int(input("To what version? "))
+        checksum_from = sorted_keys[index_from]
+        checksum_to = sorted_keys[index_to]
+        set_from = d[checksum_from]
+        set_to = d[checksum_to]
+        source_file = set_from.pop()
+        for target_file in set_to:
+            shutil.copy(source_file, target_file)
 
 
 def remove_bad_symlinks() -> None:

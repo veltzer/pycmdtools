@@ -69,3 +69,13 @@ class ConfigDownloadGoogleDrive(Config):
     destination = ParamCreator.create_new_file(
         help_string='file name to save',
     )
+
+
+class ConfigCopy(Config):
+    """
+    Configure copy stuff
+    """
+    copy = ParamCreator.create_bool(
+        help_string="Do you want to copy a certain version to others?",
+        default=False,
+    )
