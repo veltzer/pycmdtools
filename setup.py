@@ -2,19 +2,20 @@ import setuptools
 
 setuptools.setup(
     # the first three fields are a must according to the documentation
-    name='pycmdtools',
-    version='0.0.63',
+    name="pycmdtools",
+    version="0.0.63",
     packages=[
         'pycmdtools',
         'pycmdtools.endpoints',
     ],
     # from here all is optional
-    description='pycmdtools is set of useful command line tools written in python',
-    long_description='pycmdtools is set of useful command line tools written in python',
-    author='Mark Veltzer',
-    author_email='mark.veltzer@gmail.com',
-    maintainer='Mark Veltzer',
-    maintainer_email='mark.veltzer@gmail.com',
+    description="pycmdtools is set of useful command line tools written in python",
+    long_description="pycmdtools is set of useful command line tools written in python",
+    long_description_content_type="text/x-rst",
+    author="Mark Veltzer",
+    author_email="mark.veltzer@gmail.com",
+    maintainer="Mark Veltzer",
+    maintainer_email="mark.veltzer@gmail.com",
     keywords=[
         'utils',
         'command line',
@@ -22,9 +23,9 @@ setuptools.setup(
         'shell',
         'utilities',
     ],
-    url='https://veltzer.github.io/pycmdtools',
-    download_url='https://github.com/veltzer/pycmdtools',
-    license='MIT',
+    url="https://veltzer.github.io/pycmdtools",
+    download_url="https://github.com/veltzer/pycmdtools",
+    license="MIT",
     platforms=[
         'python3',
     ],
@@ -49,8 +50,8 @@ setuptools.setup(
     ],
     data_files=[
     ],
-    entry_points={'console_scripts': [
+    entry_points={"console_scripts": [
         'pycmdtools=pycmdtools.endpoints.main:main',
     ]},
-    python_requires='>=3.5',
+    python_requires=">=3.5",
 )
