@@ -25,7 +25,7 @@ setuptools.setup(
     ],
     url="https://veltzer.github.io/pycmdtools",
     download_url="https://github.com/veltzer/pycmdtools",
-    license="MIT",
+    # license="MIT",
     platforms=[
         'python3',
     ],
