@@ -1,5 +1,4 @@
 
-
 # *pycmdtools* project by Mark Veltzer
 
 ![PyPI - Status](https://img.shields.io/pypi/status/pycmdtools)
@@ -17,7 +16,7 @@
 ![Downloads](https://pepy.tech/badge/pycmdtools/month)
 ![Downloads](https://pepy.tech/badge/pycmdtools/week)
 
+
 pycmdtools is set of useful command line tools written in python
 
-project website: https://veltzer.github.io/pycmdtools
-
+project website: <https://veltzer.github.io/pycmdtools>
