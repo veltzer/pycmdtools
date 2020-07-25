@@ -4,7 +4,7 @@ main entry point to the program
 
 
 import pylogconf.core
-from pytconf.config import register_main, config_arg_parse_and_launch
+from pytconf import register_main, config_arg_parse_and_launch
 
 from pycmdtools.endpoints.group_default import register_group_default
 

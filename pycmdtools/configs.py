@@ -3,7 +3,7 @@ All configurations for pycmdtools
 """
 import hashlib
 
-from pytconf.config import Config, ParamCreator
+from pytconf import Config, ParamCreator
 
 
 class ConfigFolder(Config):

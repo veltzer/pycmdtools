@@ -12,5 +12,6 @@ project website: https://veltzer.github.io/pycmdtools
 
 author: Mark Veltzer
 
-version: 0.0.63
+version: 0.0.64
+
 

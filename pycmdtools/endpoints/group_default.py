@@ -11,7 +11,7 @@ from collections import defaultdict
 
 import requests
 import yaml
-from pytconf.config import register_endpoint, register_function_group, get_free_args
+from pytconf import register_endpoint, register_function_group, get_free_args
 from tqdm import tqdm
 
 import pycmdtools
