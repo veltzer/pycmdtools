@@ -71,6 +71,16 @@ class ConfigDownloadGoogleDrive(Config):
     )
 
 
+class ConfigDownloadGdriveURL(Config):
+    """
+    Parameters to download a share url from google drive
+    """
+    # we should really have support in pytconf for create_url...:(
+    url = ParamCreator.create_str(
+        help_string='url of the google drive document',
+    )
+
+
 class ConfigCopy(Config):
     """
     Configure copy stuff

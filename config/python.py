@@ -21,6 +21,8 @@ run_requires = [
     'pandas',
     'unidecode',
     'pyyaml',
+    'pytidylib',
+    'beautifulsoup4',
 ]
 
 test_requires = [

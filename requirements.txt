@@ -8,6 +8,8 @@ numpy
 pandas
 unidecode
 pyyaml
+pytidylib
+beautifulsoup4
 # dev requirements
 pyclassifiers
 pypitools

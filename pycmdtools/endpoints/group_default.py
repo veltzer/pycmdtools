@@ -2,14 +2,10 @@
 The default group of operations that pycmdtools has
 """
 import collections
-import functools
-import hashlib
 import json
-import os
 import shutil
 from collections import defaultdict
 
-import requests
 import yaml
 from pytconf import register_endpoint, register_function_group, get_free_args
 from tqdm import tqdm
@@ -17,8 +13,9 @@ from tqdm import tqdm
 import pycmdtools
 import pycmdtools.version
 from pycmdtools.configs import ConfigFolder, ConfigUseStandardExceptions, ConfigChangeLine, ConfigProgress, \
-    ConfigAlgorithm, ConfigDownloadGoogleDrive, ConfigCopy
-from pycmdtools.utils import yield_bad_symlinks, diamond_lines
+    ConfigAlgorithm, ConfigDownloadGoogleDrive, ConfigCopy, ConfigDownloadGdriveURL
+from pycmdtools.utils import yield_bad_symlinks, diamond_lines, checksum, download_file_from_google_drive, error, \
+    remove_bad_symlinks, gdrive_download_link
 
 GROUP_NAME_DEFAULT = "default"
 GROUP_DESCRIPTION_DEFAULT = "all pycmdtools commands"
@@ -44,10 +41,6 @@ def version() -> None:
     print(pycmdtools.version.VERSION_STR)
 
 
-def error(args):
-    raise args
-
-
 @register_endpoint(
     configs=[
         ConfigFolder,
@@ -64,6 +57,22 @@ def find_bad_symlinks() -> None:
         onerror=error,
     ):
         print(full)
+
+
+@register_endpoint(
+    configs=[
+        ConfigFolder,
+        ConfigUseStandardExceptions
+    ],
+)
+def symlinks_remove_bad() -> None:
+    """
+    remove all bad symlinks
+    """
+    remove_bad_symlinks(
+        folder=ConfigFolder.folder,
+        use_standard_exceptions=ConfigUseStandardExceptions.use_standard_exceptions,
+    )
 
 
 @register_endpoint(
@@ -203,23 +212,6 @@ def xprofile_select() -> None:
     pass
 
 
-def checksum(file_name: str = None, algorithm: str = None) -> str:
-    """
-    calculate a checksum of a file. You dictate which algorithm.
-    If you want to see all algorithms try:
-    hashlib.algorithms_available
-    :param file_name:
-    :param algorithm:
-    :return:
-    """
-    block_size = 65536
-    with open(file_name, mode='rb') as f:
-        hash_object = hashlib.new(algorithm)
-        for buf in iter(functools.partial(f.read, block_size), b''):
-            hash_object.update(buf)
-    return hash_object.hexdigest()
-
-
 @register_endpoint(
     configs=[
         ConfigProgress,
@@ -260,54 +252,10 @@ def mcmp() -> None:
             shutil.copy(source_file, target_file)
 
 
-def remove_bad_symlinks() -> None:
-    """
-    remove bad symbolic links from a folder
-    """
-    for full in yield_bad_symlinks(
-            folder=ConfigFolder.folder,
-            use_standard_exceptions=ConfigUseStandardExceptions.use_standard_exceptions,
-            onerror=error,
-    ):
-        print("removing [{}]".format(full))
-        os.unlink(full)
-
-
-def download_file_from_google_drive(file_id: str, destination: str):
-    url = "https://docs.google.com/uc?export=download"
-
-    session = requests.Session()
-
-    response = session.get(url, params={'id': file_id}, stream=True)
-    assert response.status_code == 200, "bad request"
-    token = get_confirm_token(response)
-
-    if token:
-        params = {'id': file_id, 'confirm': token}
-        response = session.get(url, params=params, stream=True)
-
-    save_response_content(response, destination)
-
-
-def get_confirm_token(response):
-    for key, value in response.cookies.items():
-        if key.startswith('download_warning'):
-            return value
-    return None
-
-
-def save_response_content(response, destination):
-    chunk_size = 32768
-    with open(destination, "wb") as f:
-        for chunk in response.iter_content(chunk_size):
-            if chunk:  # filter out keep-alive new chunks
-                f.write(chunk)
-
-
 @register_endpoint(configs=[
     ConfigDownloadGoogleDrive,
 ])
-def google_drive_download() -> None:
+def google_drive_download_by_id() -> None:
     """
     Download a file from a google drive using it's id.
 
@@ -327,3 +275,14 @@ def google_drive_download() -> None:
         ConfigDownloadGoogleDrive.file_id,
         ConfigDownloadGoogleDrive.destination,
     )
+
+
+@register_endpoint(configs=[
+    ConfigDownloadGdriveURL,
+])
+def google_drive_download_by_url() -> None:
+    """
+    Download a file shared from a google drive using a link
+    :return:
+    """
+    gdrive_download_link(url=ConfigDownloadGdriveURL.url)

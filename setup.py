@@ -44,6 +44,8 @@ setuptools.setup(
         'pandas',
         'unidecode',
         'pyyaml',
+        'pytidylib',
+        'beautifulsoup4',
     ],
     extras_require={
     },
