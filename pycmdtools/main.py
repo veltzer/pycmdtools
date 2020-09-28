@@ -6,51 +6,26 @@ import json
 import shutil
 from collections import defaultdict
 
+import pylogconf.core
 import yaml
-from pytconf import register_endpoint, register_function_group, get_free_args
+from pytconf import register_endpoint, get_free_args, register_main, config_arg_parse_and_launch
 from tqdm import tqdm
 
-import pycmdtools
-import pycmdtools.version
 from pycmdtools.configs import ConfigFolder, ConfigUseStandardExceptions, ConfigChangeLine, ConfigProgress, \
     ConfigAlgorithm, ConfigDownloadGoogleDrive, ConfigCopy, ConfigDownloadGdriveURL
+from pycmdtools.static import DESCRIPTION, APP_NAME, VERSION_STR
 from pycmdtools.utils import yield_bad_symlinks, diamond_lines, checksum, download_file_from_google_drive, error, \
     remove_bad_symlinks, gdrive_download_link
 
-GROUP_NAME_DEFAULT = "default"
-GROUP_DESCRIPTION_DEFAULT = "all pycmdtools commands"
-
-
-def register_group_default() -> None:
-    """
-    register the name and description of this group
-    """
-    register_function_group(
-        function_group_name=GROUP_NAME_DEFAULT,
-        function_group_description=GROUP_DESCRIPTION_DEFAULT,
-    )
-
 
 @register_endpoint(
-    group=GROUP_NAME_DEFAULT,
-)
-def version() -> None:
-    """
-    Print version
-    """
-    print(pycmdtools.version.VERSION_STR)
-
-
-@register_endpoint(
+    description="Find all bad symbolic links in a folder",
     configs=[
         ConfigFolder,
         ConfigUseStandardExceptions
     ],
 )
 def find_bad_symlinks() -> None:
-    """
-    Find all bad symbolic links in a folder
-    """
     for full in yield_bad_symlinks(
         folder=ConfigFolder.folder,
         use_standard_exceptions=ConfigUseStandardExceptions.use_standard_exceptions,
@@ -60,15 +35,13 @@ def find_bad_symlinks() -> None:
 
 
 @register_endpoint(
+    description="remove all bad symlinks",
     configs=[
         ConfigFolder,
         ConfigUseStandardExceptions
     ],
 )
 def symlinks_remove_bad() -> None:
-    """
-    remove all bad symlinks
-    """
     remove_bad_symlinks(
         folder=ConfigFolder.folder,
         use_standard_exceptions=ConfigUseStandardExceptions.use_standard_exceptions,
@@ -76,15 +49,13 @@ def symlinks_remove_bad() -> None:
 
 
 @register_endpoint(
+    description="Change the first line in files",
     configs=[
         ConfigChangeLine,
     ],
     allow_free_args=True,
 )
 def change_first_line() -> None:
-    """
-    Change the first line in files.
-    """
     changed = 0
     actually_changed = 0
     print("from_line is [{}]".format(ConfigChangeLine.from_line))
@@ -96,10 +67,10 @@ def change_first_line() -> None:
         if len(data) == 0:
             continue
         # change the first line
-        if ConfigChangeLine.from_line is None or data[0] == ConfigChangeLine.from_line+"\n":
-            if data[0] != ConfigChangeLine.to_line+"\n":
+        if ConfigChangeLine.from_line is None or data[0] == ConfigChangeLine.from_line + "\n":
+            if data[0] != ConfigChangeLine.to_line + "\n":
                 actually_changed += 1
-            data[0] = ConfigChangeLine.to_line+"\n"
+            data[0] = ConfigChangeLine.to_line + "\n"
             changed += 1
         with open(filename, "wt") as output_handle:
             output_handle.write("".join(data))
@@ -108,11 +79,11 @@ def change_first_line() -> None:
     print("actually_changed is [{}]".format(actually_changed))
 
 
-@register_endpoint(allow_free_args=True)
+@register_endpoint(
+    description="Print unique values and their count",
+    allow_free_args=True
+)
 def line_value_histogram() -> None:
-    """
-    Print unique values and their count
-    """
     saw = defaultdict(int)
     for line in diamond_lines(get_free_args()):
         line = line.rstrip()
@@ -121,11 +92,11 @@ def line_value_histogram() -> None:
         print('\t'.join([k, str(v)]))
 
 
-@register_endpoint(allow_free_args=True)
+@register_endpoint(
+    description="Filter out non unique values from a stream, even if not sorted",
+    allow_free_args=True
+)
 def unique() -> None:
-    """
-    Filter out non unique values from a stream, even if not sorted
-    """
     saw = set()
     for line in diamond_lines(get_free_args()):
         if line not in saw:
@@ -133,43 +104,39 @@ def unique() -> None:
             print(line, end='')
 
 
-@register_endpoint(allow_free_args=True)
+@register_endpoint(
+    description="print all command line arguments",
+    allow_free_args=True
+)
 def print_all_args() -> None:
-    """
-    print all command line arguments.
-    """
     print("number of command line arguments is {}".format(len(get_free_args())))
     for i, s in enumerate(get_free_args()):
         print("{}: {}".format(i, s))
 
 
-"""
-enable to show progress by pointing to a FILE and not a PROCESS NAME or PID.
-If you point to a file then something like fuser(1) should be called
-on the file, and if there is just one process holding the file open
-then show the progress on that file.
-
-References:
-- https://unix.stackexchange.com/questions/66795/how-to-check-progress-of-running-cp
-- https://github.com/Xfennec/progress
-- https://gist.github.com/azat/2830255
-- https://stackoverflow.com/questions/10980689/how-to-follow-the-progress-of-a-linux-command
-"""
-
-
-@register_endpoint()
+@register_endpoint(
+    description="follow the progress of another process",
+)
 def progress() -> None:
     """
-    follow the progress of another process
+    enable to show progress by pointing to a FILE and not a PROCESS NAME or PID.
+    If you point to a file then something like fuser(1) should be called
+    on the file, and if there is just one process holding the file open
+    then show the progress on that file.
+
+    References:
+    - https://unix.stackexchange.com/questions/66795/how-to-check-progress-of-running-cp
+    - https://github.com/Xfennec/progress
+    - https://gist.github.com/azat/2830255
+    - https://stackoverflow.com/questions/10980689/how-to-follow-the-progress-of-a-linux-command
     """
-    pass
 
 
-@register_endpoint(allow_free_args=True)
+@register_endpoint(
+    description="Print statistics about a list of numbers",
+    allow_free_args=True
+)
 def stats() -> None:
-    """
-    Print statistics about a list of numbers.
-    """
     total_sum = 0.0
     total_sum2 = 0.0
     count = 0
@@ -184,35 +151,34 @@ def stats() -> None:
         print("no data given")
 
 
-@register_endpoint(allow_free_args=True)
+@register_endpoint(
+    description="Validate json files",
+    allow_free_args=True
+)
 def validate_json() -> None:
-    """
-    Validate json files
-    """
     for filename in get_free_args():
         with open(filename, "rt") as input_handle:
             json.load(input_handle)
 
 
-@register_endpoint(allow_free_args=True)
+@register_endpoint(
+    description="Validate YAML files",
+    allow_free_args=True)
 def validate_yaml() -> None:
-    """
-    Validate YAML files
-    """
     for filename in get_free_args():
         with open(filename, "rt") as input_handle:
             yaml.load(input_handle)
 
 
-@register_endpoint()
+@register_endpoint(
+    description="Select an x profile with some interface from ~/.xprofilerc",
+)
 def xprofile_select() -> None:
-    """
-    Select an x profile with some interface from ~/.xprofilerc
-    """
     pass
 
 
 @register_endpoint(
+    description="compare many files and print identical ones",
     configs=[
         ConfigProgress,
         ConfigAlgorithm,
@@ -223,7 +189,6 @@ def xprofile_select() -> None:
 )
 def mcmp() -> None:
     """
-    compare many files and print identical ones
     TODO:
     - make the algorithm faster by looking only at the beginning of the files.
     - make the algorithm faster by looking at the length of the files.
@@ -252,13 +217,12 @@ def mcmp() -> None:
             shutil.copy(source_file, target_file)
 
 
-@register_endpoint(configs=[
-    ConfigDownloadGoogleDrive,
-])
+@register_endpoint(
+    description="Download a file from a google drive using it's id",
+    configs=[ConfigDownloadGoogleDrive],
+)
 def google_drive_download_by_id() -> None:
     """
-    Download a file from a google drive using it's id.
-
     If you have a link to a google drive file like this:
     https://drive.google.com/open?id=0BwNoUKizWBdnRmRmLVlWSWxzWnM
     or like this:
@@ -277,12 +241,23 @@ def google_drive_download_by_id() -> None:
     )
 
 
-@register_endpoint(configs=[
-    ConfigDownloadGdriveURL,
-])
+@register_endpoint(
+    description="Download a file shared from a google drive using a link",
+    configs=[ConfigDownloadGdriveURL],
+)
 def google_drive_download_by_url() -> None:
-    """
-    Download a file shared from a google drive using a link
-    :return:
-    """
     gdrive_download_link(url=ConfigDownloadGdriveURL.url)
+
+
+@register_main(
+    main_description=DESCRIPTION,
+    app_name=APP_NAME,
+    version=VERSION_STR,
+)
+def main():
+    pylogconf.core.setup()
+    config_arg_parse_and_launch()
+
+
+if __name__ == '__main__':
+    main()

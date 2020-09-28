@@ -12,7 +12,6 @@ setuptools.setup(
     version="0.0.64",
     packages=[
         'pycmdtools',
-        'pycmdtools.endpoints',
     ],
     # from here all is optional
     description="pycmdtools is set of useful command line tools written in python",
@@ -65,7 +64,7 @@ setuptools.setup(
     data_files=[
     ],
     entry_points={"console_scripts": [
-        'pycmdtools=pycmdtools.endpoints.main:main',
+        'pycmdtools=pycmdtools.main:main',
     ]},
     python_requires=">=3.6",
 )

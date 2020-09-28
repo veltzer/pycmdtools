@@ -1,7 +1,7 @@
-import config.project
 import pydmt.helpers.python
 
-from pycmdtools.endpoints.main import main
+import config.project
+from pycmdtools.main import main
 
 package_name = config.project.project_name
 
@@ -28,6 +28,7 @@ run_requires = [
 test_requires = [
     'pylint',  # to check for lint errors
     'pytest',  # for testing
+    'pytest-cov',  # for coverage analysis
     'pyflakes',  # for testing
 ]
 

@@ -16,6 +16,8 @@
 ![Downloads](https://pepy.tech/badge/pycmdtools/month)
 ![Downloads](https://pepy.tech/badge/pycmdtools/week)
 
+[![Known Vulnerabilities](https://snyk.io/test/github/veltzer/pycmdtools/badge.svg?targetFile=requirements.txt)](https://snyk.io/test/github/veltzer/pycmdtools?targetFile=requirements.txt)
+
 
 
 pycmdtools is set of useful command line tools written in python

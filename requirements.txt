@@ -18,4 +18,5 @@ Sphinx
 # test requirements
 pylint
 pytest
+pytest-cov
 pyflakes
