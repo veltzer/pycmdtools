@@ -19,6 +19,9 @@
 [![Known Vulnerabilities](https://snyk.io/test/github/veltzer/pycmdtools/badge.svg?targetFile=requirements.txt)](https://snyk.io/test/github/veltzer/pycmdtools?targetFile=requirements.txt)
 
 
+Actions
+
+![build](https://github.com/veltzer/pycmdtools/workflows/build/badge.svg)
 
 pycmdtools is set of useful command line tools written in python
 
