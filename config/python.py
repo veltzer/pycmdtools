@@ -29,7 +29,8 @@ test_requires = [
     'pylint',  # to check for lint errors
     'pytest',  # for testing
     'pytest-cov',  # for coverage analysis
-    'pyflakes',  # for testing
+    'flake8',  # for linting
+    'pymakehelper',  # for make
 ]
 
 dev_requires = [
