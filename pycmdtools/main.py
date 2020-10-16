@@ -3,6 +3,7 @@ The default group of operations that pycmdtools has
 """
 import collections
 import json
+import os
 import shutil
 from collections import defaultdict
 
@@ -174,7 +175,7 @@ def validate_yaml() -> None:
     description="Select an x profile with some interface from ~/.xprofilerc",
 )
 def xprofile_select() -> None:
-    pass
+    print("TBD")
 
 
 @register_endpoint(
@@ -247,6 +248,18 @@ def google_drive_download_by_id() -> None:
 )
 def google_drive_download_by_url() -> None:
     gdrive_download_link(url=ConfigDownloadGdriveURL.url)
+
+
+@register_endpoint(
+    description="Extension stats",
+    allow_free_args=True,
+)
+def extension_stats():
+    counter = collections.Counter()
+    for filename in os.listdir():
+        _, extension = os.path.split(filename)
+        counter.update(extension)
+    print(counter)
 
 
 @register_main(
