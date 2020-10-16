@@ -257,8 +257,10 @@ def google_drive_download_by_url() -> None:
 def extension_stats():
     counter = collections.Counter()
     for filename in os.listdir():
-        _, extension = os.path.split(filename)
-        counter.update(extension)
+        _, extension = os.path.splitext(filename)
+        if len(extension) >= 1 and extension[0] == ".":
+            extension = extension[1:]
+        counter.update([extension])
     print(counter)
 
 
