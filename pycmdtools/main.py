@@ -262,8 +262,11 @@ def extension_stats():
             extension = extension[1:]
         counter.update([extension])
     # pretty print the counter object
+    total = 0
     for value, count in counter.most_common():
         print(f"{value} {count}")
+        total += count
+    print(f"total is {total}")
 
 
 @register_main(
