@@ -261,7 +261,9 @@ def extension_stats():
         if len(extension) >= 1 and extension[0] == ".":
             extension = extension[1:]
         counter.update([extension])
-    print(counter)
+    # pretty print the counter object
+    for value, count in counter.most_common():
+        print(f"{value} {count}")
 
 
 @register_main(
