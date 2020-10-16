@@ -11,6 +11,7 @@ import pylogconf.core
 import yaml
 from pytconf import register_endpoint, get_free_args, register_main, config_arg_parse_and_launch
 from tqdm import tqdm
+from lxml import etree
 
 from pycmdtools.configs import ConfigFolder, ConfigUseStandardExceptions, ConfigChangeLine, ConfigProgress, \
     ConfigAlgorithm, ConfigDownloadGoogleDrive, ConfigCopy, ConfigDownloadGdriveURL
@@ -169,6 +170,15 @@ def validate_yaml() -> None:
     for filename in get_free_args():
         with open(filename, "rt") as input_handle:
             yaml.load(input_handle)
+
+
+@register_endpoint(
+    description="Validate XML files",
+    allow_free_args=True
+)
+def validate_xml() -> None:
+    for filename in get_free_args():
+        etree.parse(filename)
 
 
 @register_endpoint(

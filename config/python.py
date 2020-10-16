@@ -23,6 +23,7 @@ run_requires = [
     'pyyaml',
     'pytidylib',
     'beautifulsoup4',
+    'lxml',
 ]
 
 test_requires = [
