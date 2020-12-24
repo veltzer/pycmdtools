@@ -12,11 +12,6 @@
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/pycmdtools)
 
 ![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)
-![Downloads](https://pepy.tech/badge/pycmdtools)
-![Downloads](https://pepy.tech/badge/pycmdtools/month)
-![Downloads](https://pepy.tech/badge/pycmdtools/week)
-
-[![Known Vulnerabilities](https://snyk.io/test/github/veltzer/pycmdtools/badge.svg?targetFile=requirements.txt)](https://snyk.io/test/github/veltzer/pycmdtools?targetFile=requirements.txt)
 
 
 Actions
