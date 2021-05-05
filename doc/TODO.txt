@@ -1,3 +1,5 @@
+- make the 'extension_stats' command do recursive option to traverse
+	the folder recusively (currenly this is only shallow scan).
 - add command which creates a histogram of extensions of files in a folder.
 - make setup.py be made out of a template.
 - add a utility to remove non ascii characters from a file (with a report
