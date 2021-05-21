@@ -11,6 +11,7 @@ pyyaml
 pytidylib
 beautifulsoup4
 lxml
+browsercookie
 # dev requirements
 pyclassifiers
 pypitools

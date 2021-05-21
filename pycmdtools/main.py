@@ -60,10 +60,10 @@ def symlinks_remove_bad() -> None:
 def change_first_line() -> None:
     changed = 0
     actually_changed = 0
-    print("from_line is [{}]".format(ConfigChangeLine.from_line))
-    print("to_line is [{}]".format(ConfigChangeLine.to_line))
+    print(f"from_line is [{ConfigChangeLine.from_line}]")
+    print(f"to_line is [{ConfigChangeLine.to_line}]")
     for filename in get_free_args():
-        print("considering [{}]...".format(filename))
+        print(f"considering [{filename}]...")
         with open(filename, "rt") as input_handle:
             data = input_handle.readlines()
         if len(data) == 0:
@@ -77,8 +77,8 @@ def change_first_line() -> None:
         with open(filename, "wt") as output_handle:
             output_handle.write("".join(data))
     # print statistics
-    print("changed is [{}]".format(changed))
-    print("actually_changed is [{}]".format(actually_changed))
+    print(f"changed is [{changed}]")
+    print(f"actually_changed is [{actually_changed}]")
 
 
 @register_endpoint(
@@ -91,7 +91,7 @@ def line_value_histogram() -> None:
         line = line.rstrip()
         saw[line] += 1
     for k, v in saw.items():
-        print('\t'.join([k, str(v)]))
+        print(f"{k}\t{str(v)}")
 
 
 @register_endpoint(
@@ -111,9 +111,9 @@ def unique() -> None:
     allow_free_args=True
 )
 def print_all_args() -> None:
-    print("number of command line arguments is {}".format(len(get_free_args())))
+    print(f"number of command line arguments is {len(get_free_args())}")
     for i, s in enumerate(get_free_args()):
-        print("{}: {}".format(i, s))
+        print(f"{i}: {s}")
 
 
 @register_endpoint(
@@ -182,7 +182,7 @@ def validate_xml() -> None:
 
 
 @register_endpoint(
-    description="Select an x profile with some interface from ~/.xprofilerc",
+    description="Pick an x profile with some interface from ~/.xprofilerc",
 )
 def xprofile_select() -> None:
     print("TBD")
@@ -214,7 +214,7 @@ def mcmp() -> None:
         check_sum = checksum(file_name=file_name, algorithm=ConfigAlgorithm.algorithm)
         d[check_sum].add(file_name)
     for i, check_sum in enumerate(sorted(d.keys())):
-        print("{}: {}".format(i, ", ".join(sorted(d[check_sum]))))
+        print(f"{i}: {', '.join(sorted(d[check_sum]))}")
     if ConfigCopy.copy:
         sorted_keys = sorted(d.keys())
         index_from = int(input("From what version? "))

@@ -46,6 +46,7 @@ setuptools.setup(
         'pytidylib',
         'beautifulsoup4',
         'lxml',
+        'browsercookie',
     ],
     extras_require={
     },
