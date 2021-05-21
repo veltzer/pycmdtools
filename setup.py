@@ -9,7 +9,7 @@ def get_readme():
 setuptools.setup(
     # the first three fields are a must according to the documentation
     name="pycmdtools",
-    version="0.0.72",
+    version="0.0.73",
     packages=[
         'pycmdtools',
     ],
@@ -46,7 +46,6 @@ setuptools.setup(
         'pytidylib',
         'beautifulsoup4',
         'lxml',
-        'browsercookie',
     ],
     extras_require={
     },

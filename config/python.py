@@ -24,7 +24,6 @@ run_requires = [
     'pytidylib',
     'beautifulsoup4',
     'lxml',
-    'browsercookie',
 ]
 
 test_requires = [
