@@ -166,6 +166,7 @@ def validate_json() -> None:
 @register_endpoint(
     description="Validate YAML files",
     allow_free_args=True,
+    min_free_args=1,
 )
 def validate_yaml() -> None:
     for filename in get_free_args():
