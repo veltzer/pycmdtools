@@ -171,7 +171,7 @@ def validate_json() -> None:
 def validate_yaml() -> None:
     for filename in get_free_args():
         with open(filename, "rt") as input_handle:
-            yaml.load(input_handle)
+            yaml.load(input_handle, yaml.SafeLoader)
 
 
 @register_endpoint(
