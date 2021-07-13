@@ -15,7 +15,7 @@ project_paypal_donate_button_id = 'ASPRXR59H2NTQ'
 project_google_analytics_tracking_id = 'UA-56436979-1'
 project_short_description = 'pycmdtools is set of useful command line tools written in python'
 project_long_description = project_short_description
-# keywords to put on html pages or for search, dont put the name of the project or my details
+# keywords to put on html pages or for search, don't put the name of the project or my details
 # as they will be added automatically...
 project_keywords = [
     'utils',

@@ -155,7 +155,7 @@ def stats() -> None:
 
 @register_endpoint(
     description="Validate json files",
-    allow_free_args=True
+    allow_free_args=True,
 )
 def validate_json() -> None:
     for filename in get_free_args():
@@ -165,7 +165,8 @@ def validate_json() -> None:
 
 @register_endpoint(
     description="Validate YAML files",
-    allow_free_args=True)
+    allow_free_args=True,
+)
 def validate_yaml() -> None:
     for filename in get_free_args():
         with open(filename, "rt") as input_handle:
