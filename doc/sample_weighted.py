@@ -11,7 +11,6 @@ old_df = pd.read_csv(
     quotechar=None,
     names=['query'],
     quoting=csv.QUOTE_NONE,
-    encoding='utf8'
 )
 df = pd.read_csv(
     'all_actual_queries.txt',
@@ -19,7 +18,6 @@ df = pd.read_csv(
     quotechar=None,
     names=['query'],
     quoting=csv.QUOTE_NONE,
-    encoding='utf8'
 )
 df['query'] = df['query'].apply(unidecode)
 df['query'] = df['query'].str.replace(r'\s{2,}', ' ').str.strip().str.lower()
