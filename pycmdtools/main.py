@@ -184,7 +184,8 @@ def validate_jsonschema() -> None:
     for filename in get_free_args():
         with open(filename, "rt") as stream:
             data = json.load(stream)
-            jsonschema.validate({}, data)
+            validator = jsonschema.validators.validator_for(data)
+            validator.check_schema(data)
 
 
 @register_endpoint(
