@@ -21,6 +21,7 @@ run_requires = [
     'pandas',
     'unidecode',
     'pyyaml',
+    'jsonschema',
     'pytidylib',
     'beautifulsoup4',
     'lxml',

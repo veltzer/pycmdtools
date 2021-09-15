@@ -9,6 +9,7 @@ from collections import defaultdict
 
 import pylogconf.core
 import yaml
+import jsonschema
 from pytconf import register_endpoint, get_free_args, register_main, config_arg_parse_and_launch
 from tqdm import tqdm
 from lxml import etree
@@ -172,6 +173,18 @@ def validate_yaml() -> None:
     for filename in get_free_args():
         with open(filename, "rt") as input_handle:
             yaml.load(input_handle, yaml.SafeLoader)
+
+
+@register_endpoint(
+    description="Validate jsonschame files",
+    allow_free_args=True,
+    min_free_args=1,
+)
+def validate_jsonschema() -> None:
+    for filename in get_free_args():
+        with open(filename, "rt") as stream:
+            data = json.load(stream)
+            jsonschema.validate({}, data)
 
 
 @register_endpoint(

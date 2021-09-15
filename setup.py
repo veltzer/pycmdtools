@@ -43,6 +43,7 @@ setuptools.setup(
         'pandas',
         'unidecode',
         'pyyaml',
+        'jsonschema',
         'pytidylib',
         'beautifulsoup4',
         'lxml',
