@@ -13,7 +13,7 @@
 
 ![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)
 
-
+![build](https://github.com/veltzer/pycmdtools/workflows/build/badge.svg)
 pycmdtools is set of useful command line tools written in python
 
 project website: https://veltzer.github.io/pycmdtools
