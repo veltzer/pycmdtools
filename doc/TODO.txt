@@ -1,5 +1,7 @@
 - make the 'extension_stats' command do recursive option to traverse
 	the folder recursively (currently this is only shallow scan).
+- to a tool to compare structure of yaml and json files
+	use idea from: https://stackoverflow.com/questions/61671552/javascript-how-to-compare-only-keys-and-not-values-of-json
 - add command which creates a histogram of extensions of files in a folder.
 - make setup.py be made out of a template.
 - add a utility to remove non ascii characters from a file (with a report
