@@ -49,7 +49,7 @@ setuptools.setup(
         'lxml',
     ],
     extras_require={
-    },
+    }},
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Console',
@@ -66,7 +66,7 @@ setuptools.setup(
     data_files=[
     ],
     entry_points={"console_scripts": [
-        'pycmdtools=pycmdtools.main:main',
+        'pycmdtools=pycmdtools.main:('main',)',
     ]},
     python_requires=">=3.7",
 )
