@@ -15,7 +15,7 @@ from tqdm import tqdm
 from lxml import etree
 
 from pycmdtools.configs import ConfigFolder, ConfigUseStandardExceptions, ConfigChangeLine, ConfigProgress, \
-    ConfigAlgorithm, ConfigDownloadGoogleDrive, ConfigCopy, ConfigDownloadGdriveURL
+    ConfigAlgorithm, ConfigDownloadGoogleDrive, ConfigCopy, ConfigDownloadGdriveURL, ConfigOutput
 from pycmdtools.static import DESCRIPTION, APP_NAME, VERSION_STR
 from pycmdtools.utils import yield_bad_symlinks, diamond_lines, checksum, download_file_from_google_drive, error, \
     remove_bad_symlinks, gdrive_download_link
@@ -210,6 +210,7 @@ def xprofile_select() -> None:
         ConfigProgress,
         ConfigAlgorithm,
         ConfigCopy,
+        ConfigOutput,
     ],
     allow_free_args=True,
     min_free_args=2,
@@ -229,8 +230,11 @@ def mcmp() -> None:
     for file_name in files:
         check_sum = checksum(file_name=file_name, algorithm=ConfigAlgorithm.algorithm)
         d[check_sum].add(file_name)
-    for i, check_sum in enumerate(sorted(d.keys())):
-        print(f"{i}: {', '.join(sorted(d[check_sum]))}")
+    if ConfigOutput.print is None:
+        for i, check_sum in enumerate(sorted(d.keys())):
+            print(f"{i}: {', '.join(sorted(d[check_sum]))}")
+    else:
+        print(ConfigOutput.print)
     if ConfigCopy.copy:
         sorted_keys = sorted(d.keys())
         index_from = int(input("From what version? "))

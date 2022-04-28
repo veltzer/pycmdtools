@@ -44,7 +44,17 @@ class ConfigProgress(Config):
     """
     progress = ParamCreator.create_bool(
         help_string="show progress report",
-        default=True,
+        default=False,
+    )
+
+
+class ConfigOutput(Config):
+    """
+    Control output
+    """
+    print = ParamCreator.create_str_or_none(
+        help_string="print message or print groups",
+        default=None,
     )
 
 
