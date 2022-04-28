@@ -6,7 +6,7 @@ from pycmdtools.main import main
 package_name = config.project.project_name
 
 console_scripts = [
-    'pycmdtools=cmdtools.main:main',
+    'pycmdtools=pycmdtools.main:main',
 #    pydmt.helpers.python.make_console_script(package_name, main),
 ]
 

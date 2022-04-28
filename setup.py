@@ -66,7 +66,7 @@ setuptools.setup(
     data_files=[
     ],
     entry_points={"console_scripts": [
-        'pycmdtools=cmdtools.main:main',
+        'pycmdtools=pycmdtools.main:main',
     ]},
     python_requires=">=3.7",
 )
