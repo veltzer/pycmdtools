@@ -1,13 +1,13 @@
-#import pydmt.helpers.python
+# import pydmt.helpers.python
 
 import config.project
-from pycmdtools.main import main
+# from pycmdtools.main import main
 
 package_name = config.project.project_name
 
 console_scripts = [
     'pycmdtools=pycmdtools.main:main',
-#    pydmt.helpers.python.make_console_script(package_name, main),
+    # pydmt.helpers.python.make_console_script(package_name, main),
 ]
 
 setup_requires = [

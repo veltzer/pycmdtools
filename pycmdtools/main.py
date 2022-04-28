@@ -234,7 +234,8 @@ def mcmp() -> None:
         for i, check_sum in enumerate(sorted(d.keys())):
             print(f"{i}: {', '.join(sorted(d[check_sum]))}")
     else:
-        print(ConfigOutput.print)
+        if len(d.keys()) > 1:
+            print(ConfigOutput.print)
     if ConfigCopy.copy:
         sorted_keys = sorted(d.keys())
         index_from = int(input("From what version? "))
