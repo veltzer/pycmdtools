@@ -52,3 +52,5 @@ project_paypal_donate_button_id = None
 project_copyright_years = config.helpers.get_copyright_years(project_year_started)
 project_google_analytics_snipplet = config.helpers.get_google_analytics(project_google_analytics_tracking_id)
 project_paypal_donate_button_snipplet = config.helpers.get_paypal(project_paypal_donate_button_id)
+
+codacy_id = None
