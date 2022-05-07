@@ -34,22 +34,6 @@ setuptools.setup(
     platforms=[
         'python3',
     ],
-    install_requires=[
-        'pylogconf',
-        'pytconf',
-        'requests',
-        'tqdm',
-        'numpy',
-        'pandas',
-        'unidecode',
-        'pyyaml',
-        'jsonschema',
-        'pytidylib',
-        'beautifulsoup4',
-        'lxml',
-    ],
-    extras_require={
-    },
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Console',
