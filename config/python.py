@@ -6,7 +6,7 @@ console_scripts = [
     "pycmdtools=pycmdtools.main:main",
 ]
 
-run_requires = [
+install_requires = [
     "pylogconf",
     "pytconf",
     "requests",
