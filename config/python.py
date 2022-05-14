@@ -6,10 +6,13 @@ console_scripts = [
     "pycmdtools=pycmdtools.main:main",
 ]
 dev_requires = [
-    "pyclassifiers",
     "pypitools",
-    "pydmt",
-    "Sphinx",
+]
+config_requires = [
+    "pyclassifiers",
+]
+make_requires = [
+    "pymakehelper",
 ]
 install_requires = [
     "pylogconf",
@@ -30,7 +33,6 @@ test_requires = [
     "pytest",
     "pytest-cov",
     "flake8",
-    "pymakehelper",
 ]
 
 python_requires = ">=3.10"
