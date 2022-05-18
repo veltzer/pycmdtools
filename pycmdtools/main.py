@@ -237,16 +237,19 @@ def mcmp() -> None:
         if len(d.keys()) > 1:
             print(ConfigOutput.print)
     if ConfigCopy.copy:
-        sorted_keys = sorted(d.keys())
-        index_from = int(input("From what version? "))
-        index_to = int(input("To what version? "))
-        checksum_from = sorted_keys[index_from]
-        checksum_to = sorted_keys[index_to]
-        set_from = d[checksum_from]
-        set_to = d[checksum_to]
-        source_file = set_from.pop()
-        for target_file in set_to:
-            shutil.copy(source_file, target_file)
+        if len(d.keys()) > 1:
+            sorted_keys = sorted(d.keys())
+            index_from = int(input("From what version? "))
+            index_to = int(input("To what version? "))
+            checksum_from = sorted_keys[index_from]
+            checksum_to = sorted_keys[index_to]
+            set_from = d[checksum_from]
+            set_to = d[checksum_to]
+            source_file = set_from.pop()
+            for target_file in set_to:
+                shutil.copy(source_file, target_file)
+        else:
+            print("All copies are identical, cannot copy")
 
 
 @register_endpoint(
