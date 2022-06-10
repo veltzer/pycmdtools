@@ -290,13 +290,15 @@ def google_drive_download_by_url() -> None:
 )
 def extension_stats():
     counter = collections.Counter()
-    for filename in os.listdir():
+    for filename in get_free_args():
         _, extension = os.path.splitext(filename)
         if len(extension) >= 1 and extension[0] == ".":
             extension = extension[1:]
         counter.update([extension])
     # pretty print the counter object
     total = 0
+    # most common returns all elements if not passed a value,
+    # sorted in value order with highest first
     for value, count in counter.most_common():
         print(f"{value} {count}")
         total += count
