@@ -3,6 +3,7 @@ console_scripts = [
 ]
 dev_requires = [
     "pypitools",
+    "types-PyYAML",
 ]
 config_requires = [
     "pyclassifiers",
@@ -14,6 +15,7 @@ install_requires = [
     "pylogconf",
     "pytconf",
     "requests",
+    "types-requests",
     "tqdm",
     "numpy",
     "pandas",

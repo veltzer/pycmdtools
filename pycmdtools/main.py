@@ -6,6 +6,7 @@ import json
 import os
 import shutil
 from collections import defaultdict
+from typing import DefaultDict
 
 import pylogconf.core
 import yaml
@@ -87,7 +88,7 @@ def change_first_line() -> None:
     allow_free_args=True
 )
 def line_value_histogram() -> None:
-    saw = defaultdict(int)
+    saw: DefaultDict[str, int] = defaultdict(int)
     for line in diamond_lines(get_free_args()):
         line = line.rstrip()
         saw[line] += 1

@@ -58,7 +58,7 @@ def diamond_lines(filenames: List[str]):
                     yield line
 
 
-def checksum(file_name: str = None, algorithm: str = None) -> str:
+def checksum(file_name: str, algorithm: str) -> str:
     """
     calculate a checksum of a file. You dictate which algorithm.
     If you want to see all algorithms try:
