@@ -3,7 +3,6 @@ console_scripts = [
 ]
 dev_requires = [
     "pypitools",
-    "types-PyYAML",
 ]
 config_requires = [
     "pyclassifiers",
@@ -32,4 +31,5 @@ test_requires = [
     "pytest-cov",
     "flake8",
     "mypy",
+    "types-PyYAML",
 ]
