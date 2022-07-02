@@ -29,7 +29,7 @@ from pycmdtools.utils import yield_bad_symlinks, diamond_lines, checksum, downlo
         ConfigUseStandardExceptions
     ],
 )
-def find_bad_symlinks() -> None:
+def symlinks_find_bad() -> None:
     for full in yield_bad_symlinks(
         folder=ConfigFolder.folder,
         use_standard_exceptions=ConfigUseStandardExceptions.use_standard_exceptions,
