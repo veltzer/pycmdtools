@@ -3,6 +3,7 @@
 pylogconf
 pytconf
 requests
+types-requests
 tqdm
 numpy
 pandas
@@ -19,3 +20,5 @@ pylint
 pytest
 pytest-cov
 flake8
+mypy
+types-PyYAML

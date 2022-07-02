@@ -9,7 +9,7 @@ def get_readme():
 setuptools.setup(
     # the first three fields are a must according to the documentation
     name="pycmdtools",
-    version="0.0.78",
+    version="0.0.79",
     packages=[
         'pycmdtools',
     ],
@@ -38,6 +38,7 @@ setuptools.setup(
         'pylogconf',
         'pytconf',
         'requests',
+        'types-requests',
         'tqdm',
         'numpy',
         'pandas',
