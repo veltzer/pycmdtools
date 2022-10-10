@@ -9,6 +9,7 @@ config_requires = [
 ]
 make_requires = [
     "pymakehelper",
+    "pydmt",
 ]
 install_requires = [
     "pylogconf",
