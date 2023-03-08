@@ -4,7 +4,7 @@ import logging
 import os
 import os.path
 import sys
-from typing import Callable, List
+from typing import Callable, List, Optional
 
 # These are symbolic links used for locks in standard users directories
 __standard_exceptions__ = {
@@ -21,7 +21,7 @@ from bs4 import BeautifulSoup
 def yield_bad_symlinks(
     folder: str = ".",
     use_standard_exceptions: bool = True,
-    onerror: Callable = None,
+    onerror: Optional[Callable] = None,
 ):
     """
     remove bad symbolic links from a folder.
