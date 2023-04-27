@@ -20,6 +20,7 @@ from pycmdtools.configs import ConfigFolder, ConfigUseStandardExceptions, Config
 from pycmdtools.static import DESCRIPTION, APP_NAME, VERSION_STR
 from pycmdtools.utils import yield_bad_symlinks, diamond_lines, checksum, download_file_from_google_drive, error, \
     remove_bad_symlinks, gdrive_download_link
+from pycmdtools.python import do_python_check_syntax
 
 
 @register_endpoint(
@@ -106,6 +107,15 @@ def unique() -> None:
         if line not in saw:
             saw.add(line)
             print(line, end='')
+
+
+@register_endpoint(
+    description="check python files for syntax",
+    allow_free_args=True
+)
+def python_check_syntax() -> None:
+    for filename in get_free_args():
+        do_python_check_syntax(filename)
 
 
 @register_endpoint(
