@@ -27,7 +27,7 @@ class ConfigUseStandardExceptions(Config):
 
 class ConfigChangeLine(Config):
     """
-    Change a line in fire parameters
+    Change a line in file parameters
     """
     from_line = ParamCreator.create_str_or_none(
         help_string="from what value?",
