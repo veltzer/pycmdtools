@@ -3,11 +3,6 @@ console_scripts = [
 ]
 dev_requires = [
     "pypitools",
-    "pandas-stubs",
-    "lxml-stubs",
-    "types-beautifulsoup4",
-    "types-tqdm",
-    "types-jsonschema",
 ]
 config_requires = [
     "pyclassifiers",
@@ -16,6 +11,11 @@ make_requires = [
     "pymakehelper",
     "pydmt",
     "pyclassifiers",
+    "pandas-stubs",
+    "lxml-stubs",
+    "types-beautifulsoup4",
+    "types-tqdm",
+    "types-jsonschema",
 ]
 install_requires = [
     "pylogconf",
