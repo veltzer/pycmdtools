@@ -23,7 +23,7 @@ setuptools.setup(
     maintainer_email="mark.veltzer@gmail.com",
     keywords=[
         "utils",
-        "command line",
+        "command-line",
         "python",
         "shell",
         "utilities",
