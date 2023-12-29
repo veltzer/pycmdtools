@@ -7,16 +7,6 @@ dev_requires = [
 config_requires = [
     "pyclassifiers",
 ]
-make_requires = [
-    "pymakehelper",
-    "pydmt",
-    "pyclassifiers",
-    "pandas-stubs",
-    "lxml-stubs",
-    "types-beautifulsoup4",
-    "types-tqdm",
-    "types-jsonschema",
-]
 install_requires = [
     "pylogconf",
     "pytconf",
@@ -32,6 +22,16 @@ install_requires = [
     "beautifulsoup4",
     "lxml",
 ]
+make_requires = [
+    "pymakehelper",
+    "pydmt",
+    "pyclassifiers",
+    "pandas-stubs",
+    "lxml-stubs",
+    "types-beautifulsoup4",
+    "types-tqdm",
+    "types-jsonschema",
+]
 test_requires = [
     "pylint",
     "pytest",
@@ -40,3 +40,4 @@ test_requires = [
     "mypy",
     "types-PyYAML",
 ]
+requires = config_requires + install_requires + make_requires + test_requires
