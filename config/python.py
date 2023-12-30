@@ -1,13 +1,16 @@
-console_scripts = [
+from typing import List
+
+
+console_scripts: List[str] = [
     "pycmdtools=pycmdtools.main:main",
 ]
-dev_requires = [
+dev_requires: List[str] = [
     "pypitools",
 ]
-config_requires = [
+config_requires: List[str] = [
     "pyclassifiers",
 ]
-install_requires = [
+install_requires: List[str] = [
     "pylogconf",
     "pytconf",
     "requests",
@@ -22,7 +25,7 @@ install_requires = [
     "beautifulsoup4",
     "lxml",
 ]
-make_requires = [
+make_requires: List[str] = [
     "pymakehelper",
     "pydmt",
     "pyclassifiers",
@@ -32,7 +35,7 @@ make_requires = [
     "types-tqdm",
     "types-jsonschema",
 ]
-test_requires = [
+test_requires: List[str] = [
     "pylint",
     "pytest",
     "pytest-cov",
