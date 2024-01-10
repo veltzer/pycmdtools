@@ -5,7 +5,9 @@ console_scripts: List[str] = [
     "pycmdtools=pycmdtools.main:main",
 ]
 dev_requires: List[str] = [
+    "pymultigit",
     "pypitools",
+    "black",
 ]
 config_requires: List[str] = [
     "pyclassifiers",
