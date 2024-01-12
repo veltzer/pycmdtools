@@ -30,7 +30,6 @@ install_requires: List[str] = [
 make_requires: List[str] = [
     "pymakehelper",
     "pydmt",
-    "pyclassifiers",
     "pandas-stubs",
     "lxml-stubs",
     "types-beautifulsoup4",
