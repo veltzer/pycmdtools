@@ -49,13 +49,11 @@ def yield_bad_symlinks(
 
 def diamond_lines(filenames: List[str]):
     if not filenames:
-        for line in sys.stdin.readlines():
-            yield line
+        yield from sys.stdin.readlines()
     else:
         for filename in filenames:
             with open(filename, 'rt') as file_handle:
-                for line in file_handle:
-                    yield line
+                yield from file_handle
 
 
 def checksum(file_name: str, algorithm: str) -> str:
