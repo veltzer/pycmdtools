@@ -108,7 +108,7 @@ def unique() -> None:
     for line in diamond_lines(get_free_args()):
         if line not in saw:
             saw.add(line)
-            print(line, end='')
+            print(line, end="")
 
 
 @register_endpoint(
@@ -266,7 +266,7 @@ def mcmp() -> None:
 
 
 @register_endpoint(
-    description="Download a file from a google drive using it's id",
+    description="Download a file from a google drive using its id",
     configs=[ConfigDownloadGoogleDrive],
 )
 def google_drive_download_by_id() -> None:
@@ -333,8 +333,13 @@ def validate_html():
                 print(message, file=sys.stderr)
                 errors.append(message)
             parser.errors = error_handler
-            parser.parse(stream)
-    sys.exit(len(errors)>0)
+            try:
+                parser.parse(stream)
+            except html5lib.html5parser.ParseError as e:
+                value = str(e)
+                print(value)
+                errors.append(value)
+    sys.exit(len(errors) > 0)
 
 
 @register_main(
@@ -347,5 +352,5 @@ def main():
     config_arg_parse_and_launch()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
