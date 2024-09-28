@@ -25,6 +25,7 @@ install_requires: List[str] = [
     "pytidylib",
     "beautifulsoup4",
     "lxml",
+    "html5lib",
 ]
 build_requires: List[str] = [
     "pymakehelper",

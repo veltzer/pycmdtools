@@ -4,6 +4,7 @@ The default group of operations that pycmdtools has
 import collections
 import json
 import os
+import sys
 import shutil
 from collections import defaultdict
 from typing import DefaultDict
@@ -14,6 +15,7 @@ import jsonschema
 from pytconf import register_endpoint, get_free_args, register_main, config_arg_parse_and_launch
 from tqdm import tqdm
 from lxml import etree
+import html5lib
 
 from pycmdtools.configs import ConfigFolder, ConfigUseStandardExceptions, ConfigChangeLine, ConfigProgress, \
     ConfigAlgorithm, ConfigDownloadGoogleDrive, ConfigCopy, ConfigDownloadGdriveURL, ConfigOutput
@@ -314,6 +316,25 @@ def extension_stats():
         print(f"{value} {count}")
         total += count
     print(f"total is {total}")
+
+
+@register_endpoint(
+    description="Validate HTML files",
+    allow_free_args=True,
+    min_free_args=1,
+)
+def validate_html():
+    errors = []
+    for filename in get_free_args():
+        with open(filename, "r", encoding="utf-8") as stream:
+            parser = html5lib.HTMLParser(strict=True)
+
+            def error_handler(message):
+                print(message, file=sys.stderr)
+                errors.append(message)
+            parser.errors = error_handler
+            parser.parse(stream)
+    sys.exit(len(errors)>0)
 
 
 @register_main(
