@@ -1,8 +1,8 @@
 """ python deps for this project """
 
-console_scripts: list[str] = [
-    "pycmdtools=pycmdtools.main:main",
-]
+scripts: dict[str,str] = {
+    "pycmdtools": "pycmdtools.main:main",
+}
 config_requires: list[str] = [
     "pyclassifiers",
 ]
