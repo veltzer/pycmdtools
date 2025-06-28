@@ -6,7 +6,8 @@ import logging
 import os
 import os.path
 import sys
-from typing import Callable, List, Optional
+from typing import List, Optional
+from collections.abc import Callable
 
 # These are symbolic links used for locks in standard users directories
 __standard_exceptions__ = {
@@ -23,7 +24,7 @@ from bs4 import BeautifulSoup
 def yield_bad_symlinks(
     folder: str = ".",
     use_standard_exceptions: bool = True,
-    onerror: Optional[Callable] = None,
+    onerror: Callable | None = None,
 ):
     """
     remove bad symbolic links from a folder.
@@ -49,12 +50,12 @@ def yield_bad_symlinks(
                     yield full
 
 
-def diamond_lines(filenames: List[str]):
+def diamond_lines(filenames: list[str]):
     if not filenames:
         yield from sys.stdin.readlines()
     else:
         for filename in filenames:
-            with open(filename, 'rt') as file_handle:
+            with open(filename) as file_handle:
                 yield from file_handle
 
 

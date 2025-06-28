@@ -13,7 +13,7 @@ import subprocess
 def do_python_check_syntax(filename: str) -> None:
     # read the first line of the file
     check_with = None
-    with open(filename, "r", encoding="utf-8") as stream:
+    with open(filename, encoding="utf-8") as stream:
         for line in stream:
             line = line.rstrip()
             if line == '#!/usr/bin/python2':

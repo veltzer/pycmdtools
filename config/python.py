@@ -1,18 +1,12 @@
-""" python depedencies for this project """
-from typing import List
+""" python deps for this project """
 
-
-console_scripts: List[str] = [
+console_scripts: list[str] = [
     "pycmdtools=pycmdtools.main:main",
 ]
-dev_requires: List[str] = [
-    "pypitools",
-    "black",
-]
-config_requires: List[str] = [
+config_requires: list[str] = [
     "pyclassifiers",
 ]
-install_requires: List[str] = [
+install_requires: list[str] = [
     "pylogconf",
     "pytconf",
     "requests",
@@ -28,21 +22,21 @@ install_requires: List[str] = [
     "lxml",
     "html5lib",
 ]
-build_requires: List[str] = [
-    "pymakehelper",
+build_requires: list[str] = [
     "pydmt",
+    "pymakehelper",
+]
+test_requires: list[str] = [
+    "pylint",
+    "pytest",
+    "pytest-cov",
+    "mypy",
+    # types
+    "types-PyYAML",
     "pandas-stubs",
     "lxml-stubs",
     "types-beautifulsoup4",
     "types-tqdm",
     "types-jsonschema",
-]
-test_requires: List[str] = [
-    "pylint",
-    "pytest",
-    "pytest-cov",
-    "flake8",
-    "mypy",
-    "types-PyYAML",
 ]
 requires = config_requires + install_requires + build_requires + test_requires

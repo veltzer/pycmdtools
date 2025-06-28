@@ -69,7 +69,7 @@ def change_first_line() -> None:
     print(f"to_line is [{ConfigChangeLine.to_line}]")
     for filename in get_free_args():
         print(f"considering [{filename}]...")
-        with open(filename, "rt") as input_handle:
+        with open(filename) as input_handle:
             data = input_handle.readlines()
         if len(data) == 0:
             continue
@@ -79,7 +79,7 @@ def change_first_line() -> None:
                 actually_changed += 1
             data[0] = ConfigChangeLine.to_line + "\n"
             changed += 1
-        with open(filename, "wt") as output_handle:
+        with open(filename, "w") as output_handle:
             output_handle.write("".join(data))
     # print statistics
     print(f"changed is [{changed}]")
@@ -173,7 +173,7 @@ def stats() -> None:
 )
 def validate_json() -> None:
     for filename in get_free_args():
-        with open(filename, "rt") as input_handle:
+        with open(filename) as input_handle:
             json.load(input_handle)
 
 
@@ -184,7 +184,7 @@ def validate_json() -> None:
 )
 def validate_yaml() -> None:
     for filename in get_free_args():
-        with open(filename, "rt") as input_handle:
+        with open(filename) as input_handle:
             yaml.load(input_handle, yaml.SafeLoader)
 
 
@@ -195,7 +195,7 @@ def validate_yaml() -> None:
 )
 def validate_jsonschema() -> None:
     for filename in get_free_args():
-        with open(filename, "rt") as stream:
+        with open(filename) as stream:
             data = json.load(stream)
             validator = jsonschema.validators.validator_for(data)
             validator.check_schema(data)
@@ -326,7 +326,7 @@ def extension_stats():
 def validate_html():
     errors = []
     for filename in get_free_args():
-        with open(filename, "r", encoding="utf-8") as stream:
+        with open(filename, encoding="utf-8") as stream:
             parser = html5lib.HTMLParser(strict=True)
 
             def error_handler(message):
