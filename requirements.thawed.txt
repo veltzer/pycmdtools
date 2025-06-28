@@ -15,10 +15,10 @@ pylogconf
 pymakehelper
 pytconf
 pytest
-pytest-cov
 pytidylib
 pyyaml
 requests
+ruff
 tqdm
 types-PyYAML
 types-beautifulsoup4
