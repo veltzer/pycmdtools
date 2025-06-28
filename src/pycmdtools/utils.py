@@ -6,7 +6,6 @@ import logging
 import os
 import os.path
 import sys
-from typing import List, Optional
 from collections.abc import Callable
 
 # These are symbolic links used for locks in standard users directories
