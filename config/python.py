@@ -23,8 +23,10 @@ install_requires: list[str] = [
     "html5lib",
 ]
 build_requires: list[str] = [
+    "hatch",
     "pydmt",
     "pymakehelper",
+    "pycmdtools",
 ]
 test_requires: list[str] = [
     "pylint",

@@ -1,5 +1,6 @@
 # THIS IS AN AUTO-GENERATED FILE. DO NOT EDIT!
 beautifulsoup4
+hatch
 html5lib
 jsonschema
 lxml
@@ -9,6 +10,7 @@ numpy
 pandas
 pandas-stubs
 pyclassifiers
+pycmdtools
 pydmt
 pylint
 pylogconf
