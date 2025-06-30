@@ -1,11 +1,10 @@
 """ python deps for this project """
 
+import config.shared
+
 scripts: dict[str,str] = {
     "pycmdtools": "pycmdtools.main:main",
 }
-config_requires: list[str] = [
-    "pyclassifiers",
-]
 install_requires: list[str] = [
     "pylogconf",
     "pytconf",
@@ -22,18 +21,9 @@ install_requires: list[str] = [
     "lxml",
     "html5lib",
 ]
-build_requires: list[str] = [
-    "hatch",
-    "pydmt",
-    "pymakehelper",
-    "pycmdtools",
-]
-test_requires: list[str] = [
-    "pylint",
-    "pytest",
-    "mypy",
-    "ruff",
-    # types
+build_requires: list[str] = config.shared.PBUILD
+test_requires: list[str] = config.shared.PTEST
+types_requires: list[str] = [
     "types-PyYAML",
     "pandas-stubs",
     "lxml-stubs",
@@ -41,4 +31,4 @@ test_requires: list[str] = [
     "types-tqdm",
     "types-jsonschema",
 ]
-requires = config_requires + install_requires + build_requires + test_requires
+requires = install_requires + build_requires + test_requires + types_requires
