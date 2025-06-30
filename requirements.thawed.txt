@@ -9,6 +9,7 @@ mypy
 numpy
 pandas
 pandas-stubs
+pyclassifiers
 pycmdtools
 pydmt
 pylint
