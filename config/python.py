@@ -2,9 +2,6 @@
 
 import config.shared
 
-scripts: dict[str,str] = {
-    "pycmdtools": "pycmdtools.main:main",
-}
 install_requires: list[str] = [
     "pylogconf",
     "pytconf",
@@ -32,3 +29,7 @@ types_requires: list[str] = [
     "types-jsonschema",
 ]
 requires = install_requires + build_requires + test_requires + types_requires
+
+scripts: dict[str,str] = {
+    "pycmdtools": "pycmdtools.main:main",
+}
