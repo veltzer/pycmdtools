@@ -10,10 +10,10 @@ from collections.abc import Callable
 
 # These are symbolic links used for locks in standard users directories
 __standard_exceptions__ = {
-    'lock',  # firefox lock, $HOME/.mozilla/firefox/[XXX].default/lock
-    'SingletonCookie',  # chrome lock, /home/mark/.config/google-chrome/SingletonCookie
-    'SingletonLock',  # chrome lock, /home/mark/.config/google-chrome/SingletonLock
-    'SingletonSocket',  # chrome lock, /home/mark/.config/google-chrome/SingletonSocket
+    "lock",  # firefox lock, $HOME/.mozilla/firefox/[XXX].default/lock
+    "SingletonCookie",  # chrome lock, /home/mark/.config/google-chrome/SingletonCookie
+    "SingletonLock",  # chrome lock, /home/mark/.config/google-chrome/SingletonLock
+    "SingletonSocket",  # chrome lock, /home/mark/.config/google-chrome/SingletonSocket
 }
 
 import requests
@@ -68,9 +68,9 @@ def checksum(file_name: str, algorithm: str) -> str:
     :return:
     """
     block_size = 65536
-    with open(file_name, mode='rb') as f:
+    with open(file_name, mode="rb") as f:
         hash_object = hashlib.new(algorithm)
-        for buf in iter(functools.partial(f.read, block_size), b''):
+        for buf in iter(functools.partial(f.read, block_size), b""):
             hash_object.update(buf)
     return hash_object.hexdigest()
 
@@ -93,12 +93,12 @@ def download_file_from_google_drive(file_id: str, destination: str):
 
     session = requests.Session()
 
-    response = session.get(url, params={'id': file_id}, stream=True)
+    response = session.get(url, params={"id": file_id}, stream=True)
     assert response.status_code == 200, "bad request"
     token = get_confirm_token(response)
 
     if token:
-        params = {'id': file_id, 'confirm': token}
+        params = {"id": file_id, "confirm": token}
         response = session.get(url, params=params, stream=True)
 
     save_response_content(response, destination)
@@ -122,7 +122,7 @@ def gdrive_download_link(url: str):
     assert response.status_code == 200, response.status_code
     bad_document = response.content.decode()
     # document, _errors = tidy_document(bad_document, options={
-    #    'doctype': 'omit',
+    #    "doctype": "omit",
     # })
     s = BeautifulSoup(bad_document)
     print(s)
@@ -132,7 +132,7 @@ def gdrive_download_link(url: str):
 
 def get_confirm_token(response):
     for key, value in response.cookies.items():
-        if key.startswith('download_warning'):
+        if key.startswith("download_warning"):
             return value
     return None
 

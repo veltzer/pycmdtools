@@ -74,10 +74,10 @@ class ConfigDownloadGoogleDrive(Config):
     Parameters for downloading a file from google drive
     """
     file_id = ParamCreator.create_str(
-        help_string='id of the google drive document',
+        help_string="id of the google drive document",
     )
     destination = ParamCreator.create_new_file(
-        help_string='file name to save',
+        help_string="file name to save",
     )
 
 
@@ -87,7 +87,7 @@ class ConfigDownloadGdriveURL(Config):
     """
     # we should really have support in pytconf for create_url...:(
     url = ParamCreator.create_str(
-        help_string='url of the google drive document',
+        help_string="url of the google drive document",
     )
 
 

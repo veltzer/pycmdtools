@@ -245,7 +245,8 @@ def mcmp() -> None:
         d[check_sum].add(file_name)
     if ConfigOutput.print is None:
         for i, check_sum in enumerate(sorted(d.keys())):
-            print(f"{i}: {', '.join(sorted(d[check_sum]))}")
+            formatted = ", ".join(sorted(d[check_sum]))
+            print(f"{i}: {formatted}")
     else:
         if len(d.keys()) > 1:
             print(ConfigOutput.print)
