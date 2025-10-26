@@ -8,6 +8,7 @@ import sys
 import shutil
 from collections import defaultdict
 from typing import DefaultDict
+import csv
 
 import pylogconf.core
 import yaml
@@ -175,6 +176,18 @@ def validate_json() -> None:
     for filename in get_free_args():
         with open(filename) as input_handle:
             json.load(input_handle)
+
+
+@register_endpoint(
+    description="Validate csv files",
+    allow_free_args=True,
+)
+def validate_csv() -> None:
+    for filename in get_free_args():
+        with open(filename) as input_handle:
+            _ = csv.DictReader(input_handle).fieldnames
+            for _i, _row in enumerate(csv.reader(input_handle), 2):
+                pass
 
 
 @register_endpoint(
