@@ -191,6 +191,20 @@ def validate_csv() -> None:
 
 
 @register_endpoint(
+    description="Count csv lines",
+    allow_free_args=True,
+)
+def linecount_csv() -> None:
+    for filename in get_free_args():
+        with open(filename) as input_handle:
+            _ = csv.DictReader(input_handle).fieldnames
+            count = 0
+            for _i, _row in enumerate(csv.reader(input_handle), 2):
+                count = count + 1
+            print(f"[{filename}] line count is [{count}]")
+
+
+@register_endpoint(
     description="Validate YAML files",
     allow_free_args=True,
     min_free_args=1,
