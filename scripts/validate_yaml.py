@@ -46,7 +46,7 @@ def check_order_recursively(data, schema, filename, path="", debug=False):
     """
     is_valid = True
     if debug:
-        print(f"DEBUG: Checking order at path '{path or 'root'}'")
+        print(f"DEBUG: Checking order at path [{path}]")
 
     # Case 1: The data is a dictionary (an object in YAML/JSON)
     if isinstance(data, dict):
@@ -57,9 +57,9 @@ def check_order_recursively(data, schema, filename, path="", debug=False):
             ordered_actual_keys = [key for key in expected_order if key in actual_keys]
 
             if ordered_actual_keys != [key for key in actual_keys if key in expected_order]:
-                line_num = data.lc.line if hasattr(data, 'lc') else 'N/A'
+                line_num = data.lc.line if hasattr(data, "lc") else "N/A"
                 print(f"Error in filename: {filename}:{line_num}")
-                print(f"Property Order FAILED at path: {path or 'root'}")
+                print(f"Property Order FAILED at path: {path}")
                 print(f"Expected order of keys: {expected_order}")
                 print(f"Actual order of keys: {actual_keys}")
                 is_valid = False
@@ -88,7 +88,7 @@ def main():
     parser = argparse.ArgumentParser(
         description="Validate a YAML file against a JSON schema, including property order."
     )
-    parser.add_argument("yaml_files", nargs='+', help="One or more YAML files to validate.")
+    parser.add_argument("yaml_files", nargs="+", help="One or more YAML files to validate.")
     parser.add_argument("--debug", action="store_true", help="Enable verbose debug output for resolver and order checking.")
     args = parser.parse_args()
 
