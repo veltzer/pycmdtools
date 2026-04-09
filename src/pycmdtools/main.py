@@ -13,13 +13,19 @@ import csv
 import pylogconf.core
 import yaml
 import jsonschema
+from ruamel.yaml import YAML
+from jsonschema import Draft7Validator
+from referencing import Registry, Resource
+from referencing.jsonschema import DRAFT7
 from pytconf import register_endpoint, get_free_args, register_main, config_arg_parse_and_launch
 from tqdm import tqdm
 from lxml import etree
 import html5lib
 
 from pycmdtools.configs import ConfigFolder, ConfigUseStandardExceptions, ConfigChangeLine, ConfigProgress, \
-    ConfigAlgorithm, ConfigDownloadGoogleDrive, ConfigCopy, ConfigDownloadGdriveURL, ConfigOutput
+    ConfigAlgorithm, ConfigDownloadGoogleDrive, ConfigCopy, ConfigDownloadGdriveURL, ConfigOutput, ConfigDebug, \
+    ConfigUseCache, ConfigSchemaUrl
+from pycmdtools import schema_cache
 from pycmdtools.static import DESCRIPTION, APP_NAME, VERSION_STR
 from pycmdtools.utils import yield_bad_symlinks, diamond_lines, checksum, download_file_from_google_drive, error, \
     remove_bad_symlinks, gdrive_download_link
@@ -213,6 +219,109 @@ def validate_yaml() -> None:
     for filename in get_free_args():
         with open(filename) as input_handle:
             yaml.load(input_handle, yaml.SafeLoader)
+
+
+def _check_order_recursively(data, schema, filename, path="", debug=False) -> bool:
+    is_valid = True
+    if debug:
+        print(f"DEBUG: Checking order at path [{path}]")
+    if isinstance(data, dict):
+        if "propertyOrdering" in schema:
+            expected_order = schema["propertyOrdering"]
+            actual_keys = list(data.keys())
+            ordered_actual_keys = [key for key in expected_order if key in actual_keys]
+            if ordered_actual_keys != [key for key in actual_keys if key in expected_order]:
+                line_num = data.lc.line if hasattr(data, "lc") else "N/A"
+                print(f"Error in filename: {filename}:{line_num}")
+                print(f"Property Order FAILED at path: {path}")
+                print(f"Expected order of keys: {expected_order}")
+                print(f"Actual order of keys: {actual_keys}")
+                is_valid = False
+        for key, value in data.items():
+            sub_schema = schema.get("properties", {}).get(key)
+            if sub_schema:
+                new_path = f"{path}.{key}" if path else key
+                if not _check_order_recursively(value, sub_schema, filename, new_path, debug):
+                    is_valid = False
+    elif isinstance(data, list):
+        item_schema = schema.get("items")
+        if item_schema:
+            for i, item in enumerate(data):
+                new_path = f"{path}[{i}]"
+                if not _check_order_recursively(item, item_schema, filename, new_path, debug):
+                    is_valid = False
+    return is_valid
+
+
+@register_endpoint(
+    description="Validate YAML files against JSON schema with property order checking",
+    configs=[
+        ConfigDebug,
+        ConfigUseCache,
+    ],
+    allow_free_args=True,
+    min_free_args=1,
+)
+def validate_yaml_advanced() -> None:
+    memory_cache: dict = {}
+    use_cache = ConfigUseCache.use_cache
+    errors = False
+    for yaml_file in get_free_args():
+        ruamel = YAML(typ="rt")
+        with open(yaml_file, encoding="UTF8") as f:
+            data = ruamel.load(f)
+        schema_url = data.get("$schema")
+        if not schema_url:
+            print(f"Error: [{yaml_file}] does not contain a $schema URL reference")
+            sys.exit(1)
+        fetched = schema_cache.fetch_schema(schema_url, use_cache, memory_cache)
+
+        def retriever(uri):
+            return Resource.from_contents(schema_cache.fetch_schema(uri, use_cache, memory_cache))
+
+        resource = Resource.from_contents(fetched, default_specification=DRAFT7)
+        registry = Registry(retrieve=retriever).with_resource(schema_url, resource)  # type: ignore[call-arg]
+        validator = Draft7Validator(fetched, registry=registry)
+        validator.validate(data)
+
+        if not _check_order_recursively(data, fetched, yaml_file, debug=ConfigDebug.debug):
+            errors = True
+    if errors:
+        sys.exit(1)
+
+
+@register_endpoint(
+    description="List all cached schemas",
+)
+def schema_cache_list() -> None:
+    entries = schema_cache.list_entries()
+    if not entries:
+        print("Schema cache is empty")
+        return
+    for url, path in entries:
+        print(f"{url}\n  {path}")
+    print(f"\n{len(entries)} cached schema(s)")
+
+
+@register_endpoint(
+    description="Clear all cached schemas",
+)
+def schema_cache_clear() -> None:
+    count = schema_cache.clear_all()
+    print(f"Removed {count} cached schema(s)")
+
+
+@register_endpoint(
+    description="Remove a specific schema from the cache by URL",
+    configs=[
+        ConfigSchemaUrl,
+    ],
+)
+def schema_cache_remove() -> None:
+    if schema_cache.remove_entry(ConfigSchemaUrl.schema_url):
+        print(f"Removed cached schema for {ConfigSchemaUrl.schema_url}")
+    else:
+        print(f"No cached schema found for {ConfigSchemaUrl.schema_url}")
 
 
 @register_endpoint(

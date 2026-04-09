@@ -99,3 +99,32 @@ class ConfigCopy(Config):
         help_string="Do you want to copy a certain version to others?",
         default=False,
     )
+
+
+class ConfigDebug(Config):
+    """
+    Enable debug output
+    """
+    debug = ParamCreator.create_bool(
+        help_string="enable verbose debug output",
+        default=False,
+    )
+
+
+class ConfigUseCache(Config):
+    """
+    Enable or disable disk-based schema cache
+    """
+    use_cache = ParamCreator.create_bool(
+        help_string="use disk cache for fetched schemas",
+        default=True,
+    )
+
+
+class ConfigSchemaUrl(Config):
+    """
+    A schema URL parameter
+    """
+    schema_url = ParamCreator.create_str(
+        help_string="schema URL to remove from cache",
+    )

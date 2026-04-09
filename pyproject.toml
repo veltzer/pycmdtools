@@ -44,6 +44,8 @@ dependencies = [
     "unidecode",
     "pyyaml",
     "jsonschema",
+    "ruamel.yaml",
+    "referencing",
     "pytidylib",
     "beautifulsoup4",
     "lxml",
