@@ -13,6 +13,8 @@ install_requires: list[str] = [
     "unidecode",
     "pyyaml",
     "jsonschema",
+    "ruamel.yaml",
+    "referencing",
     "pytidylib",
     "beautifulsoup4",
     "lxml",
