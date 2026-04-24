@@ -19,6 +19,7 @@ pytest
 pytidylib
 pyyaml
 requests
+ruamel.yaml
 ruff
 tqdm
 types-PyYAML
