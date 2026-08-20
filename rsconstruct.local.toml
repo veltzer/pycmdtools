@@ -1,1 +1,22 @@
 # Repo-specific overlay. Deep-merged over the canonical rsconstruct.toml.
+
+# Runtime deps so CI installs what the code imports (pylint/mypy resolve
+# them) -- the demos-cloud-aws pattern.
+[dependencies]
+pip = [
+    "beautifulsoup4",
+    "types-beautifulsoup4",
+    "html5lib",
+    "jsonschema",
+    "lxml",
+    "pylogconf",
+    "pytconf",
+    "referencing",
+    "requests",
+    "types-requests",
+    "ruamel.yaml",
+    "tqdm",
+    "types-tqdm",
+    "pyyaml",
+    "types-PyYAML",
+]
