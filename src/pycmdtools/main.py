@@ -2,34 +2,51 @@
 The default group of operations that pycmdtools has
 """
 import collections
+import csv
 import json
 import os
-import sys
 import shutil
+import sys
 from collections import defaultdict
-from typing import DefaultDict
-import csv
 
+import html5lib
+import jsonschema
 import pylogconf.core
 import yaml
-import jsonschema
-from ruamel.yaml import YAML
 from jsonschema import Draft7Validator
+from lxml import etree
+from pytconf import config_arg_parse_and_launch, get_free_args, register_endpoint, register_main
 from referencing import Registry, Resource
 from referencing.jsonschema import DRAFT7
-from pytconf import register_endpoint, get_free_args, register_main, config_arg_parse_and_launch
+from ruamel.yaml import YAML
 from tqdm import tqdm
-from lxml import etree
-import html5lib
 
-from pycmdtools.configs import ConfigFolder, ConfigUseStandardExceptions, ConfigChangeLine, ConfigProgress, \
-    ConfigAlgorithm, ConfigDownloadGoogleDrive, ConfigCopy, ConfigDownloadGdriveURL, ConfigOutput, ConfigDebug, \
-    ConfigUseCache, ConfigSchemaUrl
 from pycmdtools import schema_cache
-from pycmdtools.static import DESCRIPTION, APP_NAME, VERSION_STR
-from pycmdtools.utils import yield_bad_symlinks, diamond_lines, checksum, download_file_from_google_drive, error, \
-    remove_bad_symlinks, gdrive_download_link
+from pycmdtools.configs import (
+    ConfigAlgorithm,
+    ConfigChangeLine,
+    ConfigCopy,
+    ConfigDebug,
+    ConfigDownloadGdriveURL,
+    ConfigDownloadGoogleDrive,
+    ConfigFolder,
+    ConfigOutput,
+    ConfigProgress,
+    ConfigSchemaUrl,
+    ConfigUseCache,
+    ConfigUseStandardExceptions,
+)
 from pycmdtools.python import do_python_check_syntax
+from pycmdtools.static import APP_NAME, DESCRIPTION, VERSION_STR
+from pycmdtools.utils import (
+    checksum,
+    diamond_lines,
+    download_file_from_google_drive,
+    error,
+    gdrive_download_link,
+    remove_bad_symlinks,
+    yield_bad_symlinks,
+)
 
 
 @register_endpoint(
@@ -98,12 +115,12 @@ def change_first_line() -> None:
     allow_free_args=True
 )
 def line_value_histogram() -> None:
-    saw: DefaultDict[str, int] = defaultdict(int)
+    saw: defaultdict[str, int] = defaultdict(int)
     for line in diamond_lines(get_free_args()):
         line = line.rstrip()
         saw[line] += 1
     for k, v in saw.items():
-        print(f"{k}\t{str(v)}")
+        print(f"{k}\t{v!s}")
 
 
 @register_endpoint(
