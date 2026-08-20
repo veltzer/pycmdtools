@@ -19,4 +19,6 @@ pip = [
     "types-tqdm",
     "pyyaml",
     "types-PyYAML",
+    "types-jsonschema",
+    "lxml-stubs",
 ]
