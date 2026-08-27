@@ -97,3 +97,12 @@ installer = "uv"
 
 [tool.uv.pip]
 prerelease = "disallow"
+
+[dependency-groups]
+dev = [
+    "types-beautifulsoup4",
+    "types-tqdm",
+    "types-PyYAML",
+    "types-jsonschema",
+    "lxml-stubs",
+]

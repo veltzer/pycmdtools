@@ -32,9 +32,6 @@ src_dirs = ["src", "config", "tests"]
 [processor.mypy]
 src_dirs = ["src", "config", "tests"]
 
-[processor.requirements]
-src_dirs = ["src", "config", "tests"]
-
 [processor.pytest]
 src_dirs = ["tests"]
 
@@ -45,26 +42,3 @@ src_dirs = ["config"]
 
 [processor.taplo]
 src_dirs = ["."]
-
-# Runtime deps so CI installs what the code imports (pylint/mypy resolve
-# them) -- the demos-cloud-aws pattern.
-[dependencies]
-pip = [
-    "beautifulsoup4",
-    "types-beautifulsoup4",
-    "html5lib",
-    "jsonschema",
-    "lxml",
-    "pylogconf",
-    "pytconf",
-    "referencing",
-    "requests",
-    "types-requests",
-    "ruamel.yaml",
-    "tqdm",
-    "types-tqdm",
-    "pyyaml",
-    "types-PyYAML",
-    "types-jsonschema",
-    "lxml-stubs",
-]
