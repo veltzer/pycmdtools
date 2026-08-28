@@ -22,16 +22,17 @@ def _cache_path(url: str) -> Path:
 
 def _read_entry(path: Path) -> dict:
     with open(path) as f:
-        return json.load(f)
+        entry: dict = json.load(f)
+        return entry
 
 
-def fetch_schema(url: str, use_cache: bool, memory_cache: dict) -> dict:
+def fetch_schema(url: str, use_cache: bool, memory_cache: dict[str, dict]) -> dict:
     if url in memory_cache:
         return memory_cache[url]
     if use_cache:
         path = _cache_path(url)
         if path.exists():
-            schema = _read_entry(path)
+            schema: dict = _read_entry(path)
             memory_cache[url] = schema
             return schema
     response = requests.get(url, timeout=5)
