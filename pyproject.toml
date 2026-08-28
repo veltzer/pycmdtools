@@ -37,7 +37,6 @@ dependencies = [
     "pylogconf",
     "pytconf",
     "requests",
-    "types-requests",
     "tqdm",
     "numpy",
     "pandas",
@@ -113,6 +112,7 @@ prerelease = "disallow"
 
 [dependency-groups]
 dev = [
+    "types-requests",
     "types-beautifulsoup4",
     "types-tqdm",
     "types-PyYAML",

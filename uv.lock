@@ -381,7 +381,6 @@ dependencies = [
     { name = "requests" },
     { name = "ruamel-yaml" },
     { name = "tqdm" },
-    { name = "types-requests" },
     { name = "unidecode" },
 ]
 
@@ -391,6 +390,7 @@ dev = [
     { name = "types-beautifulsoup4" },
     { name = "types-jsonschema" },
     { name = "types-pyyaml" },
+    { name = "types-requests" },
     { name = "types-tqdm" },
 ]
 
@@ -410,7 +410,6 @@ requires-dist = [
     { name = "requests" },
     { name = "ruamel-yaml" },
     { name = "tqdm" },
-    { name = "types-requests" },
     { name = "unidecode" },
 ]
 
@@ -420,6 +419,7 @@ dev = [
     { name = "types-beautifulsoup4" },
     { name = "types-jsonschema" },
     { name = "types-pyyaml" },
+    { name = "types-requests" },
     { name = "types-tqdm" },
 ]
 
