@@ -112,14 +112,15 @@ prerelease = "disallow"
 
 [dependency-groups]
 dev = [
+    "lxml-stubs",
     "mypy",
     "pylint",
     "pytest",
     "ruff",
-    "types-requests",
+    "sphinx",
     "types-beautifulsoup4",
-    "types-tqdm",
-    "types-PyYAML",
     "types-jsonschema",
-    "lxml-stubs",
+    "types-PyYAML",
+    "types-requests",
+    "types-tqdm",
 ]
