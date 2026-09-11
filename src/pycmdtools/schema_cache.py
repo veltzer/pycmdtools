@@ -32,7 +32,7 @@ def fetch_schema(url: str, use_cache: bool, memory_cache: dict[str, dict]) -> di
     if use_cache:
         path = _cache_path(url)
         if path.exists():
-            schema: dict = _read_entry(path)
+            schema: dict = _read_entry(path)["schema"]
             memory_cache[url] = schema
             return schema
     response = requests.get(url, timeout=5)

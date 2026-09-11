@@ -112,9 +112,9 @@ class SchemaCacheTests(unittest.TestCase):
                     json.dump({"url": url, "schema": schema}, fh)
                 memory_cache: dict = {}
                 got = schema_cache.fetch_schema(url, use_cache=True, memory_cache=memory_cache)
-                # on a disk-cache hit fetch_schema returns the whole stored
-                # entry (url + schema), and memoises that same object
-                self.assertEqual(got, {"url": url, "schema": schema})
+                # a disk-cache hit returns the bare schema (the same shape the
+                # memory-cache and fetch paths return) and memoises it
+                self.assertEqual(got, schema)
                 self.assertIs(memory_cache[url], got)
             finally:
                 schema_cache.CACHE_DIR = orig
