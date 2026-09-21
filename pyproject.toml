@@ -114,7 +114,6 @@ prerelease = "disallow"
 dev = [
     "lxml-stubs",
     "mypy",
-    "pylint",
     "pytest",
     "ruff",
     "sphinx",
