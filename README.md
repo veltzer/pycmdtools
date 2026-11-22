@@ -5,7 +5,7 @@
 
 description: pycmdtools is set of useful command line tools written in python
 
-project website: https://veltzer.github.io/pycmdtools
+project website: <https://veltzer.github.io/pycmdtools>
 
 author: Mark Veltzer
 
