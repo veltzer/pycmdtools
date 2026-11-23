@@ -117,8 +117,7 @@ def change_first_line() -> None:
 def line_value_histogram() -> None:
     saw: defaultdict[str, int] = defaultdict(int)
     for line in diamond_lines(get_free_args()):
-        line = line.rstrip()
-        saw[line] += 1
+        saw[line.rstrip()] += 1
     for k, v in saw.items():
         print(f"{k}\t{v!s}")
 
@@ -400,9 +399,8 @@ def mcmp() -> None:
         for i, check_sum in enumerate(sorted(d.keys())):
             formatted = ", ".join(sorted(d[check_sum]))
             print(f"{i}: {formatted}")
-    else:
-        if len(d.keys()) > 1:
-            print(ConfigOutput.print)
+    elif len(d.keys()) > 1:
+        print(ConfigOutput.print)
     if ConfigCopy.copy:
         if len(d.keys()) > 1:
             sorted_keys = sorted(d.keys())
@@ -483,10 +481,6 @@ def validate_html():
         with open(filename, encoding="utf-8") as stream:
             parser = html5lib.HTMLParser(strict=True)
 
-            def error_handler(message):
-                print(message, file=sys.stderr)
-                errors.append(message)
-            parser.errors = error_handler
             try:
                 parser.parse(stream)
             except html5lib.html5parser.ParseError as e:
