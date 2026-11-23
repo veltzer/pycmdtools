@@ -5,6 +5,10 @@ import json
 import os
 import tempfile
 import unittest
+from pathlib import Path
+from unittest import mock
+
+import pytest
 
 from pycmdtools import schema_cache, utils
 
@@ -18,7 +22,7 @@ class ChecksumTests(unittest.TestCase):
         try:
             got = utils.checksum(name, "sha256")
             want = hashlib.sha256(data).hexdigest()
-            self.assertEqual(got, want)
+            assert got == want
         finally:
             os.unlink(name)
 
@@ -28,7 +32,7 @@ class ChecksumTests(unittest.TestCase):
         try:
             got = utils.checksum(name, "md5")
             want = hashlib.new("md5", b"").hexdigest()
-            self.assertEqual(got, want)
+            assert got == want
         finally:
             os.unlink(name)
 
@@ -42,7 +46,7 @@ class DiamondLinesTests(unittest.TestCase):
                     fh.write(chunk)
                     names.append(fh.name)
             lines = list(utils.diamond_lines(names))
-            self.assertEqual(lines, ["a\n", "b\n", "c\n"])
+            assert lines == ["a\n", "b\n", "c\n"]
         finally:
             for n in names:
                 os.unlink(n)
@@ -63,31 +67,46 @@ class BadSymlinkTests(unittest.TestCase):
             os.symlink(target, good)
             os.symlink(os.path.join(d, "does-not-exist"), bad)
             found = list(utils.yield_bad_symlinks(folder=d))
-            self.assertEqual(found, [bad])
+            assert found == [bad]
 
     def test_standard_exceptions_are_skipped(self):
         with tempfile.TemporaryDirectory() as d:
             lock = os.path.join(d, "lock")
             os.symlink(os.path.join(d, "missing"), lock)
             skipped = list(utils.yield_bad_symlinks(folder=d, use_standard_exceptions=True))
-            self.assertEqual(skipped, [])
+            assert skipped == []
             included = list(utils.yield_bad_symlinks(folder=d, use_standard_exceptions=False))
-            self.assertEqual(included, [lock])
+            assert included == [lock]
 
 
 class ErrorTests(unittest.TestCase):
     def test_error_reraises(self):
         exc = OSError("boom")
-        with self.assertRaises(OSError):
+        with pytest.raises(OSError, match="boom"):
             utils.error(exc)
 
 
+def _cache_file(url: str) -> Path:
+    """Where schema_cache stores `url`: CACHE_DIR/<sha256 of the url>.json."""
+    return schema_cache.CACHE_DIR / (hashlib.sha256(url.encode()).hexdigest() + ".json")
+
+
 class SchemaCacheTests(unittest.TestCase):
-    def test_url_to_filename_is_sha256_json(self):
+    def test_fetch_schema_stores_under_sha256_json_name(self):
         url = "https://example.com/schema.json"
-        got = schema_cache._url_to_filename(url)  # pylint: disable=protected-access
-        want = hashlib.sha256(url.encode()).hexdigest() + ".json"
-        self.assertEqual(got, want)
+        with tempfile.TemporaryDirectory() as d:
+            orig = schema_cache.CACHE_DIR
+            schema_cache.CACHE_DIR = schema_cache.Path(d)
+            try:
+                response = mock.Mock()
+                response.json.return_value = {"type": "object"}
+                with mock.patch.object(schema_cache.requests, "get", return_value=response):
+                    schema_cache.fetch_schema(url, use_cache=True, memory_cache={})
+                assert [p.name for p in schema_cache.Path(d).iterdir()] == [
+                    hashlib.sha256(url.encode()).hexdigest() + ".json"
+                ]
+            finally:
+                schema_cache.CACHE_DIR = orig
 
     def test_fetch_schema_uses_memory_cache(self):
         cached = {"type": "object"}
@@ -98,7 +117,7 @@ class SchemaCacheTests(unittest.TestCase):
             use_cache=False,
             memory_cache=memory_cache,
         )
-        self.assertIs(got, cached)
+        assert got is cached
 
     def test_fetch_schema_reads_disk_cache(self):
         with tempfile.TemporaryDirectory() as d:
@@ -107,15 +126,15 @@ class SchemaCacheTests(unittest.TestCase):
             try:
                 url = "https://example.com/disk.json"
                 schema = {"title": "on disk"}
-                path = schema_cache._cache_path(url)  # pylint: disable=protected-access
+                path = _cache_file(url)
                 with open(path, "w", encoding="utf-8") as fh:
                     json.dump({"url": url, "schema": schema}, fh)
                 memory_cache: dict = {}
                 got = schema_cache.fetch_schema(url, use_cache=True, memory_cache=memory_cache)
                 # a disk-cache hit returns the bare schema (the same shape the
                 # memory-cache and fetch paths return) and memoises it
-                self.assertEqual(got, schema)
-                self.assertIs(memory_cache[url], got)
+                assert got == schema
+                assert memory_cache[url] is got
             finally:
                 schema_cache.CACHE_DIR = orig
 
@@ -125,18 +144,18 @@ class SchemaCacheTests(unittest.TestCase):
             schema_cache.CACHE_DIR = schema_cache.Path(d)
             try:
                 url = "https://example.com/one.json"
-                path = schema_cache._cache_path(url)  # pylint: disable=protected-access
+                path = _cache_file(url)
                 with open(path, "w", encoding="utf-8") as fh:
                     json.dump({"url": url, "schema": {}}, fh)
-                self.assertEqual(schema_cache.list_entries(), [(url, str(path))])
-                self.assertTrue(schema_cache.remove_entry(url))
-                self.assertFalse(schema_cache.remove_entry(url))
-                self.assertEqual(schema_cache.list_entries(), [])
+                assert schema_cache.list_entries() == [(url, str(path))]
+                assert schema_cache.remove_entry(url)
+                assert not schema_cache.remove_entry(url)
+                assert schema_cache.list_entries() == []
                 # clear_all counts what it deletes
-                with open(schema_cache._cache_path("https://example.com/two.json"),  # pylint: disable=protected-access
+                with open(_cache_file("https://example.com/two.json"),
                           "w", encoding="utf-8") as fh:
                     json.dump({"url": "https://example.com/two.json", "schema": {}}, fh)
-                self.assertEqual(schema_cache.clear_all(), 1)
+                assert schema_cache.clear_all() == 1
             finally:
                 schema_cache.CACHE_DIR = orig
 

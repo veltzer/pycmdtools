@@ -8,6 +8,7 @@ import os
 import shutil
 import sys
 from collections import defaultdict
+from typing import Any, cast
 
 import html5lib
 import jsonschema
@@ -296,7 +297,8 @@ def validate_yaml_advanced() -> None:
             return Resource.from_contents(schema_cache.fetch_schema(uri, use_cache, memory_cache))
 
         resource = Resource.from_contents(fetched, default_specification=DRAFT7)
-        registry = Registry(retrieve=retriever).with_resource(schema_url, resource)  # type: ignore[call-arg]
+        # referencing declares Registry with attrs (field alias `retrieve`), which the type checker cannot see
+        registry = cast(Any, Registry)(retrieve=retriever).with_resource(schema_url, resource)
         validator = Draft7Validator(fetched, registry=registry)
         validator.validate(data)
 
