@@ -98,14 +98,6 @@ search-path = [
     "src",
     ".",
 ]
-# Third-party libraries without type information.
-ignore-missing-imports = [
-    "jsonschema.*",
-    "pylogconf.*",
-    "pytconf.*",
-    "ruamel.*",
-    "tqdm.*",
-]
 
 [tool.pyrefly.errors]
 no-any-return = "error"
