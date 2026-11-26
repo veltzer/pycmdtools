@@ -298,7 +298,7 @@ def validate_yaml_advanced() -> None:
 
         resource = Resource.from_contents(fetched, default_specification=DRAFT7)
         # referencing declares Registry with attrs (field alias `retrieve`), which the type checker cannot see
-        registry = cast(Any, Registry)(retrieve=retriever).with_resource(schema_url, resource)
+        registry = cast("Any", Registry)(retrieve=retriever).with_resource(schema_url, resource)
         validator = Draft7Validator(fetched, registry=registry)
         validator.validate(data)
 

@@ -6,7 +6,6 @@ import logging
 import os
 import os.path
 import sys
-from collections.abc import Callable
 
 # These are symbolic links used for locks in standard users directories
 __standard_exceptions__ = {
@@ -16,8 +15,13 @@ __standard_exceptions__ = {
     "SingletonSocket",  # chrome lock, /home/mark/.config/google-chrome/SingletonSocket
 }
 
+from typing import TYPE_CHECKING
+
 import requests
 from bs4 import BeautifulSoup
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
 
 
 def yield_bad_symlinks(

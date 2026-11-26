@@ -5,12 +5,15 @@ import json
 import os
 import tempfile
 import unittest
-from pathlib import Path
+from typing import TYPE_CHECKING
 from unittest import mock
 
 import pytest
 
 from pycmdtools import schema_cache, utils
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 
 class ChecksumTests(unittest.TestCase):
