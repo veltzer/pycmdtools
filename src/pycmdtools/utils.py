@@ -126,13 +126,8 @@ def gdrive_download_link(url: str):
     response = session.get(url=url, stream=True)
     assert response.status_code == 200, response.status_code
     bad_document = response.content.decode()
-    # document, _errors = tidy_document(bad_document, options={
-    #    "doctype": "omit",
-    # })
     s = BeautifulSoup(bad_document)
     print(s)
-    # dom = xml.dom.minidom.parseString(document)
-    # print(dom)
 
 
 def get_confirm_token(response):
