@@ -23,6 +23,8 @@ from bs4 import BeautifulSoup
 if TYPE_CHECKING:
     from collections.abc import Callable
 
+    from requests.models import Response
+
 
 def yield_bad_symlinks(
     folder: str = ".",
@@ -93,7 +95,7 @@ def remove_bad_symlinks(folder: str, *, use_standard_exceptions: bool) -> None:
         os.unlink(full)
 
 
-def download_file_from_google_drive(file_id: str, destination: str):
+def download_file_from_google_drive(file_id: str, destination: str) -> None:
     url = "https://docs.google.com/uc?export=download"
 
     session = requests.Session()
@@ -109,7 +111,7 @@ def download_file_from_google_drive(file_id: str, destination: str):
     save_response_content(response, destination)
 
 
-def gdrive_download_link(url: str):
+def gdrive_download_link(url: str) -> None:
     """
     Here is a sample google drive shared url:
     https://drive.google.com/file/d/1EbAbRUKowIi7ZL8fcktsEqj-gvcyq0a6/view?usp=sharing
@@ -130,14 +132,14 @@ def gdrive_download_link(url: str):
     print(s)
 
 
-def get_confirm_token(response):
+def get_confirm_token(response: Response):
     for key, value in response.cookies.items():
         if key.startswith("download_warning"):
             return value
     return None
 
 
-def save_response_content(response, destination):
+def save_response_content(response: Response, destination: str) -> None:
     chunk_size = 32768
     with open(destination, "wb") as f:
         for chunk in response.iter_content(chunk_size):
@@ -145,5 +147,5 @@ def save_response_content(response, destination):
                 f.write(chunk)
 
 
-def error(args):
+def error(args: OSError):
     raise args

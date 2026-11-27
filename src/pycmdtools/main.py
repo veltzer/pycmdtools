@@ -238,7 +238,7 @@ def validate_yaml() -> None:
             yaml.load(input_handle, yaml.SafeLoader)
 
 
-def _check_order_recursively(data, schema, filename, path="", *, debug=False) -> bool:
+def _check_order_recursively(data: object, schema: dict[str, Any], filename: str, path: str = "", *, debug: bool = False) -> bool:
     is_valid = True
     if debug:
         print(f"DEBUG: Checking order at path [{path}]")
@@ -293,7 +293,7 @@ def validate_yaml_advanced() -> None:
             sys.exit(1)
         fetched = schema_cache.fetch_schema(schema_url, use_cache=use_cache, memory_cache=memory_cache)
 
-        def retriever(uri):
+        def retriever(uri: str):
             return Resource.from_contents(schema_cache.fetch_schema(uri, use_cache=use_cache, memory_cache=memory_cache))
 
         resource = Resource.from_contents(fetched, default_specification=DRAFT7)
@@ -455,7 +455,7 @@ def google_drive_download_by_url() -> None:
     description="Extension stats",
     allow_free_args=True,
 )
-def extension_stats():
+def extension_stats() -> None:
     counter = collections.Counter()
     for filename in get_free_args():
         _, extension = os.path.splitext(filename)
@@ -497,7 +497,7 @@ def validate_html():
     app_name=APP_NAME,
     version=VERSION_STR,
 )
-def main():
+def main() -> None:
     pylogconf.core.setup()
     config_arg_parse_and_launch()
 

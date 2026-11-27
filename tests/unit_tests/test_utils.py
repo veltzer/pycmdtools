@@ -17,7 +17,7 @@ if TYPE_CHECKING:
 
 
 class ChecksumTests(unittest.TestCase):
-    def test_checksum_matches_hashlib(self):
+    def test_checksum_matches_hashlib(self) -> None:
         data = b"pycmdtools checksum payload\n" * 500
         with tempfile.NamedTemporaryFile(delete=False) as fh:
             fh.write(data)
@@ -29,7 +29,7 @@ class ChecksumTests(unittest.TestCase):
         finally:
             os.unlink(name)
 
-    def test_checksum_empty_file(self):
+    def test_checksum_empty_file(self) -> None:
         with tempfile.NamedTemporaryFile(delete=False) as fh:
             name = fh.name
         try:
@@ -41,7 +41,7 @@ class ChecksumTests(unittest.TestCase):
 
 
 class DiamondLinesTests(unittest.TestCase):
-    def test_reads_lines_from_files(self):
+    def test_reads_lines_from_files(self) -> None:
         names = []
         try:
             for chunk in ("a\nb\n", "c\n"):
@@ -61,7 +61,7 @@ class BadSymlinkTests(unittest.TestCase):
         with open(path, "w", encoding="utf-8"):
             pass
 
-    def test_finds_dangling_symlink(self):
+    def test_finds_dangling_symlink(self) -> None:
         with tempfile.TemporaryDirectory() as d:
             target = os.path.join(d, "target")
             self._touch(target)
@@ -72,7 +72,7 @@ class BadSymlinkTests(unittest.TestCase):
             found = list(utils.yield_bad_symlinks(folder=d))
             assert found == [bad]
 
-    def test_standard_exceptions_are_skipped(self):
+    def test_standard_exceptions_are_skipped(self) -> None:
         with tempfile.TemporaryDirectory() as d:
             lock = os.path.join(d, "lock")
             os.symlink(os.path.join(d, "missing"), lock)
@@ -83,7 +83,7 @@ class BadSymlinkTests(unittest.TestCase):
 
 
 class ErrorTests(unittest.TestCase):
-    def test_error_reraises(self):
+    def test_error_reraises(self) -> None:
         exc = OSError("boom")
         with pytest.raises(OSError, match="boom"):
             utils.error(exc)
@@ -95,7 +95,7 @@ def _cache_file(url: str) -> Path:
 
 
 class SchemaCacheTests(unittest.TestCase):
-    def test_fetch_schema_stores_under_sha256_json_name(self):
+    def test_fetch_schema_stores_under_sha256_json_name(self) -> None:
         url = "https://example.com/schema.json"
         with tempfile.TemporaryDirectory() as d:
             orig = schema_cache.CACHE_DIR
@@ -111,7 +111,7 @@ class SchemaCacheTests(unittest.TestCase):
             finally:
                 schema_cache.CACHE_DIR = orig
 
-    def test_fetch_schema_uses_memory_cache(self):
+    def test_fetch_schema_uses_memory_cache(self) -> None:
         cached = {"type": "object"}
         memory_cache = {"https://example.com/s.json": cached}
         # a memory-cache hit must not touch disk or network
@@ -122,7 +122,7 @@ class SchemaCacheTests(unittest.TestCase):
         )
         assert got is cached
 
-    def test_fetch_schema_reads_disk_cache(self):
+    def test_fetch_schema_reads_disk_cache(self) -> None:
         with tempfile.TemporaryDirectory() as d:
             orig = schema_cache.CACHE_DIR
             schema_cache.CACHE_DIR = schema_cache.Path(d)
@@ -141,7 +141,7 @@ class SchemaCacheTests(unittest.TestCase):
             finally:
                 schema_cache.CACHE_DIR = orig
 
-    def test_list_and_remove_and_clear_entries(self):
+    def test_list_and_remove_and_clear_entries(self) -> None:
         with tempfile.TemporaryDirectory() as d:
             orig = schema_cache.CACHE_DIR
             schema_cache.CACHE_DIR = schema_cache.Path(d)
