@@ -6,6 +6,7 @@ import hashlib
 import json
 import os
 from pathlib import Path
+from typing import Any
 
 import requests
 
@@ -20,19 +21,19 @@ def _cache_path(url: str) -> Path:
     return CACHE_DIR / _url_to_filename(url)
 
 
-def _read_entry(path: Path) -> dict:
+def _read_entry(path: Path) -> dict[str, Any]:
     with open(path) as f:
-        entry: dict = json.load(f)
+        entry: dict[str, Any] = json.load(f)
         return entry
 
 
-def fetch_schema(url: str, *, use_cache: bool, memory_cache: dict[str, dict]) -> dict:
+def fetch_schema(url: str, *, use_cache: bool, memory_cache: dict[str, dict[str, Any]]) -> dict[str, Any]:
     if url in memory_cache:
         return memory_cache[url]
     if use_cache:
         path = _cache_path(url)
         if path.exists():
-            schema: dict = _read_entry(path)["schema"]
+            schema: dict[str, Any] = _read_entry(path)["schema"]
             memory_cache[url] = schema
             return schema
     response = requests.get(url, timeout=5)

@@ -280,7 +280,7 @@ def _check_order_recursively(data, schema, filename, path="", *, debug=False) ->
     min_free_args=1,
 )
 def validate_yaml_advanced() -> None:
-    memory_cache: dict = {}
+    memory_cache: dict[str, Any] = {}
     use_cache = ConfigUseCache.use_cache
     errors = False
     for yaml_file in get_free_args():

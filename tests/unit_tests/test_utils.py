@@ -5,7 +5,7 @@ import json
 import os
 import tempfile
 import unittest
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 from unittest import mock
 
 import pytest
@@ -132,7 +132,7 @@ class SchemaCacheTests(unittest.TestCase):
                 path = _cache_file(url)
                 with open(path, "w", encoding="utf-8") as fh:
                     json.dump({"url": url, "schema": schema}, fh)
-                memory_cache: dict = {}
+                memory_cache: dict[str, Any] = {}
                 got = schema_cache.fetch_schema(url, use_cache=True, memory_cache=memory_cache)
                 # a disk-cache hit returns the bare schema (the same shape the
                 # memory-cache and fetch paths return) and memoises it

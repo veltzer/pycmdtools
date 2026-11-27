@@ -15,7 +15,7 @@ __standard_exceptions__ = {
     "SingletonSocket",  # chrome lock, /home/mark/.config/google-chrome/SingletonSocket
 }
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 import requests
 from bs4 import BeautifulSoup
@@ -28,7 +28,7 @@ def yield_bad_symlinks(
     folder: str = ".",
     *,
     use_standard_exceptions: bool = True,
-    onerror: Callable | None = None,
+    onerror: Callable[..., Any] | None = None,
 ):
     """
     remove bad symbolic links from a folder.
