@@ -26,7 +26,7 @@ def _read_entry(path: Path) -> dict:
         return entry
 
 
-def fetch_schema(url: str, use_cache: bool, memory_cache: dict[str, dict]) -> dict:
+def fetch_schema(url: str, *, use_cache: bool, memory_cache: dict[str, dict]) -> dict:
     if url in memory_cache:
         return memory_cache[url]
     if use_cache:

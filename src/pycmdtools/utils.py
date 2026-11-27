@@ -26,6 +26,7 @@ if TYPE_CHECKING:
 
 def yield_bad_symlinks(
     folder: str = ".",
+    *,
     use_standard_exceptions: bool = True,
     onerror: Callable | None = None,
 ):
@@ -79,7 +80,7 @@ def checksum(file_name: str, algorithm: str) -> str:
     return hash_object.hexdigest()
 
 
-def remove_bad_symlinks(folder: str, use_standard_exceptions: bool) -> None:
+def remove_bad_symlinks(folder: str, *, use_standard_exceptions: bool) -> None:
     """
     remove bad symbolic links from a folder
     """

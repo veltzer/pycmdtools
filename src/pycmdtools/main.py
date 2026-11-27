@@ -238,7 +238,7 @@ def validate_yaml() -> None:
             yaml.load(input_handle, yaml.SafeLoader)
 
 
-def _check_order_recursively(data, schema, filename, path="", debug=False) -> bool:
+def _check_order_recursively(data, schema, filename, path="", *, debug=False) -> bool:
     is_valid = True
     if debug:
         print(f"DEBUG: Checking order at path [{path}]")
@@ -258,14 +258,14 @@ def _check_order_recursively(data, schema, filename, path="", debug=False) -> bo
             sub_schema = schema.get("properties", {}).get(key)
             if sub_schema:
                 new_path = f"{path}.{key}" if path else key
-                if not _check_order_recursively(value, sub_schema, filename, new_path, debug):
+                if not _check_order_recursively(value, sub_schema, filename, new_path, debug=debug):
                     is_valid = False
     elif isinstance(data, list):
         item_schema = schema.get("items")
         if item_schema:
             for i, item in enumerate(data):
                 new_path = f"{path}[{i}]"
-                if not _check_order_recursively(item, item_schema, filename, new_path, debug):
+                if not _check_order_recursively(item, item_schema, filename, new_path, debug=debug):
                     is_valid = False
     return is_valid
 
@@ -291,10 +291,10 @@ def validate_yaml_advanced() -> None:
         if not schema_url:
             print(f"Error: [{yaml_file}] does not contain a $schema URL reference")
             sys.exit(1)
-        fetched = schema_cache.fetch_schema(schema_url, use_cache, memory_cache)
+        fetched = schema_cache.fetch_schema(schema_url, use_cache=use_cache, memory_cache=memory_cache)
 
         def retriever(uri):
-            return Resource.from_contents(schema_cache.fetch_schema(uri, use_cache, memory_cache))
+            return Resource.from_contents(schema_cache.fetch_schema(uri, use_cache=use_cache, memory_cache=memory_cache))
 
         resource = Resource.from_contents(fetched, default_specification=DRAFT7)
         # referencing declares Registry with attrs (field alias `retrieve`), which the type checker cannot see
